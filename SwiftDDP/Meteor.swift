@@ -103,19 +103,28 @@ public class Meteor {
     public static func subscribe(name:String, callback: DDPCallback?) -> String { return client.sub(name, params: nil, callback: callback) }
     
     /**
-    Sends an unsubscribe request to the server.
-    
+    Sends an unsubscribe request to the server. Unsubscibes to all subscriptions with the provided name.
+     - parameter name:       The name of the subscription.
+     
     */
     
-    public static func unsubscribe(name:String) -> String? { return client.unsub(name) }
+    public static func unsubscribe(name:String) -> [String] { return client.unsub(withName: name) }
     
     /**
-    Sends an unsubscribe request to the server. If a callback is passed, the callback asynchronously
-    runs when the unsubscribe transaction is complete.
+     Sends an unsubscribe request to the server using a subscription id. This allows fine-grained control of subscriptions. For example, you can unsubscribe to specific combinations of subscriptions and subscription parameters. 
+     - parameter id: An id string returned from a subscription request
+     */
     
-    */
+    public static func unsubscribe(withId id:String) { return client.unsub(withId: id, callback: nil) }
     
-    public static func unsubscribe(name:String, callback:DDPCallback?) -> String? { return client.unsub(name, callback: callback) }
+    /**
+     Sends an unsubscribe request to the server using a subscription id. This allows fine-grained control of subscriptions. For example, you can unsubscribe to specific combinations of subscriptions and subscription parameters. If a callback is passed, the callback asynchronously
+     runs when the unsubscribe transaction is complete.
+     - parameter id: An id string returned from a subscription request
+     - parameter callback:   The closure to be executed when the method has been executed
+     */
+    
+    public static func unsubscribe(withId id:String, callback:DDPCallback?) { return client.unsub(withId: id, callback: callback) }
     
     /**
     Calls a method on the server. If a callback is passed, the callback is asynchronously
@@ -188,6 +197,34 @@ public class Meteor {
         client.signupWithEmail(email, password: password, callback: callback)
     }
     
+    /**
+     Creates a user account on the server with an email and password
+     
+     - parameter email:      An email string
+     - parameter password:   A password string
+     - parameter profile:    A dictionary containing the user profile
+     - parameter callback:   A closure with result and error parameters describing the outcome of the operation
+     
+     */
+    
+    public static func signupWithEmail(email: String, password: String, profile: NSDictionary, callback: DDPMethodCallback?) {
+        client.signupWithEmail(email, password: password, profile: profile, callback: callback)
+    }
+    
+    /**
+     Creates a user account on the server with a username and password
+     
+     - parameter username:   A username string
+     - parameter password:   A password string
+     - parameter email:      An email to be associated with the account
+     - parameter profile:    A dictionary containing the user profile
+     - parameter callback:   A closure with result and error parameters describing the outcome of the operation
+     
+     */
+    
+    public static func signupWithUsername(username: String, password: String, email: String? = nil, profile: NSDictionary? = nil, callback: DDPMethodCallback? = nil) {
+        client.signupWithUsername(username, password: password, email: email, profile: profile, callback: callback)
+    }
     
     /**
     Logs a user into the server using an email and password
@@ -212,37 +249,49 @@ public class Meteor {
         client.loginWithPassword(email, password: password, callback: nil)
     }
     
+    /**
+     Logs a user into the server using a username and password
+     
+     - parameter username:   A username string
+     - parameter password:   A password string
+     - parameter callback:   A closure with result and error parameters describing the outcome of the operation
+     */
+    
+    public static func loginWithUsername(username:String, password:String, callback:DDPMethodCallback? = nil) {
+        client.loginWithUsername(username, password: password, callback: callback)
+    }
+    
     internal static func loginWithService<T: UIViewController>(service: String, clientId: String, viewController: T) {
         
         // Resume rather than
-        if Meteor.client.loginWithToken(nil) == false {
-            var url:String!
-            
-            switch service {
-            case "twitter":
-                url = MeteorOAuthServices.twitter()
-                
-            case "facebook":
-                url =  MeteorOAuthServices.facebook(clientId)
-                
-            case "github":
-                url = MeteorOAuthServices.github(clientId)
-                
-            case "google":
-                url = MeteorOAuthServices.google(clientId)
-                
-            default:
-                url = nil
-            }
-            
-            let oauthDialog = MeteorOAuthDialogViewController()
-            oauthDialog.serviceName = service.capitalizedString
-            oauthDialog.url = NSURL(string: url)
-            viewController.presentViewController(oauthDialog, animated: true, completion: nil)
-            
-        } else {
-            log.debug("Already have valid server login credentials. Logging in with preexisting login token")
-        }
+//        if Meteor.client.loginWithToken(nil) == false {
+//            var url:String!
+//            
+//            switch service {
+//            case "twitter":
+//                url = MeteorOAuthServices.twitter()
+//                
+//            case "facebook":
+//                url =  MeteorOAuthServices.facebook(clientId)
+//                
+//            case "github":
+//                url = MeteorOAuthServices.github(clientId)
+//                
+//            case "google":
+//                url = MeteorOAuthServices.google(clientId)
+//                
+//            default:
+//                url = nil
+//            }
+//            
+//            let oauthDialog = MeteorOAuthDialogViewController()
+//            oauthDialog.serviceName = service.capitalizedString
+//            oauthDialog.url = NSURL(string: url)
+//            viewController.presentViewController(oauthDialog, animated: true, completion: nil)
+//            
+//        } else {
+//            log.debug("Already have valid server login credentials. Logging in with preexisting login token")
+//        }
         
     }
     
