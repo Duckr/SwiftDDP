@@ -52,7 +52,7 @@ extension String {
 extension NSDictionary {
     func stringValue() -> String? {
         if let data = try? NSJSONSerialization.dataWithJSONObject(self, options: NSJSONWritingOptions(rawValue: 0)) {
-            return NSString(data: data, encoding: NSASCIIStringEncoding) as? String
+            return String(data: data, encoding: NSUTF8StringEncoding)
         }
         return nil
     }
@@ -257,18 +257,20 @@ extension DDPClient {
         method("login", params: NSArray(arrayLiteral: params)) { result, error in
             guard let e = error where (e.isValid == true) else {
                 
-                if let user = params["user"],
-                    let email = user["email"] {
+                if let user = params["user"] {
+                    if let email = user["email"] {
                         self.userData.setObject(email, forKey: DDP_EMAIL)
+                    }
+                    if let username = user["username"] {
+                        self.userData.setObject(username, forKey: DDP_USERNAME)
+                    }
                 }
                 
                 if let data = result as? NSDictionary,
                     let id = data["id"] as? String,
                     let token = data["token"] as? String,
-                    let tokenExpires = data["tokenExpires"] as? NSDictionary,
-                    let date = tokenExpires["$date"] as? Int {
-                        let timestamp = NSTimeInterval(Double(date)) / 1000.0
-                        let expiration = NSDate(timeIntervalSince1970: timestamp)
+                    let tokenExpires = data["tokenExpires"] as? NSDictionary {
+                        let expiration = dateFromTimestamp(tokenExpires)
                         self.userData.setObject(id, forKey: DDP_ID)
                         self.userData.setObject(token, forKey: DDP_TOKEN)
                         self.userData.setObject(expiration, forKey: DDP_TOKEN_EXPIRES)
@@ -311,6 +313,21 @@ extension DDPClient {
     }
     
     /**
+     Logs a user into the server using a username and password
+     
+     - parameter username:   A username string
+     - parameter password:   A password string
+     - parameter callback:   A closure with result and error parameters describing the outcome of the operation
+     */
+    
+    public func loginWithUsername(username: String, password: String, callback: DDPMethodCallback?) {
+        if !(loginWithToken(callback)) {
+            let params = ["user": ["username": username], "password":["digest": password.sha256(), "algorithm":"sha-256"]] as NSDictionary
+            login(params, callback: callback)
+        }
+    }
+    
+    /**
     Attempts to login a user with a token, if one exists
     
     - parameter callback:   A closure with result and error parameters describing the outcome of the operation
@@ -338,13 +355,15 @@ extension DDPClient {
                     self.userData.setObject(email, forKey: DDP_EMAIL)
                 }
                 
+                if let username = params["username"] {
+                    self.userData.setObject(username, forKey: DDP_USERNAME)
+                }
+                
                 if let data = result as? NSDictionary,
                     let id = data["id"] as? String,
                     let token = data["token"] as? String,
-                    let tokenExpires = data["tokenExpires"] as? NSDictionary,
-                    let date = tokenExpires["$date"] as? Int {
-                        let timestamp = NSTimeInterval(Double(date)) / 1000.0
-                        let expiration = NSDate(timeIntervalSince1970: timestamp)
+                    let tokenExpires = data["tokenExpires"] as? NSDictionary {
+                        let expiration = dateFromTimestamp(tokenExpires)
                         self.userData.setObject(id, forKey: DDP_ID)
                         self.userData.setObject(token, forKey: DDP_TOKEN)
                         self.userData.setObject(expiration, forKey: DDP_TOKEN_EXPIRES)
@@ -375,6 +394,21 @@ extension DDPClient {
     
     public func signupWithEmail(email: String, password: String, profile: NSDictionary, callback: ((result:AnyObject?, error:DDPError?) -> ())?) {
         let params = ["email":email, "password":["digest":password.sha256(), "algorithm":"sha-256"], "profile":profile]
+        signup(params, callback: callback)
+    }
+    
+    /**
+     Invokes a Meteor method to create a user account with a given username, email and password, and a NSDictionary containing a user profile
+     */
+    
+    public func signupWithUsername(username: String, password: String, email: String?, profile: NSDictionary?, callback: ((result:AnyObject?, error:DDPError?) -> ())?) {
+        let params: NSMutableDictionary = ["username":username, "password":["digest":password.sha256(), "algorithm":"sha-256"]]
+        if let email = email {
+            params.setValue(email, forKey: "email")
+        }
+        if let profile = profile {
+            params.setValue(profile, forKey: "profile")
+        }
         signup(params, callback: callback)
     }
     
@@ -431,10 +465,12 @@ extension DDPClient {
                     self.userMainQueue.addOperationWithBlock() {
                         let user = self.user()
                         NSNotificationCenter.defaultCenter().postNotificationName(DDP_USER_DID_LOGOUT, object: nil)
+
                         if let _ = self.delegate {
                             self.delegate!.ddpUserDidLogout(user)
                         }
                         self.resetUserData()
+                        NSNotificationCenter.defaultCenter().postNotificationName(DDP_USER_DID_LOGOUT, object: nil)
                     }
                     
                 } else {

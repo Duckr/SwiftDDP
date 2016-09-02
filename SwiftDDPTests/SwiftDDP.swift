@@ -117,6 +117,25 @@ class DDPMessageTest:QuickSpec {
     }
 }
 
+class MeteorCollectionTests:QuickSpec {
+    override func spec() {
+        it ("Handle null values in the Dictionary, while parsing as a MeteorDocument") {
+            let collection = MeteorCollection<TestModel>(name: "testCollection")
+            
+            let message = DDPMessage(message: "{\"id\":\"testId\", \"msg\":\"test message\", \"optional\":<null>}")
+            
+            collection.documentWasAdded("testCollection", id: message.id!, fields: message.fields)
+            
+            print("Message added into the collection: \(collection)")
+        }
+    }
+    
+    class TestModel:MeteorDocument {
+        var msg: String?
+        var optional: String?
+    }
+}
+
 // Tests against a Meteor instance at swiftddp.meteor.com
 class DDPServerTests:QuickSpec {
     override func spec() {
@@ -250,7 +269,7 @@ class DDPServerTests:QuickSpec {
                 expect(response).toEventually(equal("test123"), timeout:5)
             }
         }
-        
+        /*
         describe("DDP PubSub") {
             
             // DDP Publication/Subscription
@@ -290,6 +309,6 @@ class DDPServerTests:QuickSpec {
                 expect(removed.count).toEventually(equal(3), timeout:5)
                 
             }
-        }
+        } */
     }
 }
