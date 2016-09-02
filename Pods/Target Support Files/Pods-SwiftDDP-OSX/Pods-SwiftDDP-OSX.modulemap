@@ -1,0 +1,6 @@
+framework module Pods_SwiftDDP_OSX {
+  umbrella header "Pods-SwiftDDP-OSX-umbrella.h"
+
+  export *
+  module * { export * }
+}

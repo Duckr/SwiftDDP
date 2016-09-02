@@ -1,0 +1,6 @@
+framework module Pods_SwiftDDP_tvOS {
+  umbrella header "Pods-SwiftDDP-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

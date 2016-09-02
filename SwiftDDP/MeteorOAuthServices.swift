@@ -28,7 +28,7 @@ public class MeteorOAuthServices {
         let httpUrl = MeteorOAuth.httpUrl
         let token = randomBase64String()
         let redirect = "\(httpUrl)/_oauth/twitter"
-        let state = MeteorOAuth.stateParam(token, redirectUrl: redirect)
+        let state = MeteorOAuth.stateParam(credentialToken: token, redirectUrl: redirect)
         
         return "\(httpUrl)/_oauth/twitter/?requestTokenAndRedirect=true&state=\(state)"
     
@@ -39,7 +39,7 @@ public class MeteorOAuthServices {
         let token = randomBase64String()
         let httpUrl = MeteorOAuth.httpUrl
         let redirect = "\(httpUrl)/_oauth/facebook?close"
-        let state = MeteorOAuth.stateParam(token, redirectUrl: redirect)
+        let state = MeteorOAuth.stateParam(credentialToken: token, redirectUrl: redirect)
         
         let scope = "email"
         
@@ -57,7 +57,7 @@ public class MeteorOAuthServices {
         let token = randomBase64String()
         let httpUrl = MeteorOAuth.httpUrl
         let redirect = "\(httpUrl)/_oauth/github"
-        let state = MeteorOAuth.stateParam(token, redirectUrl: redirect)
+        let state = MeteorOAuth.stateParam(credentialToken: token, redirectUrl: redirect)
         
         let scope = "user:email"
         
@@ -74,7 +74,7 @@ public class MeteorOAuthServices {
         let token = randomBase64String()
         let httpUrl = MeteorOAuth.httpUrl
         let redirect = "\(httpUrl)/_oauth/google?close"
-        let state = MeteorOAuth.stateParam(token, redirectUrl: redirect)
+        let state = MeteorOAuth.stateParam(credentialToken: token, redirectUrl: redirect)
 
         let scope = "email"
         

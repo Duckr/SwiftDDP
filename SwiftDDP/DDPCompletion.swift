@@ -28,7 +28,7 @@ not available, execution defaults to the main queue.
 
 public struct Completion {
     
-    var executionQueue:NSOperationQueue? = NSOperationQueue.currentQueue()
+    var executionQueue:OperationQueue? = OperationQueue.current
     var methodCallback:DDPMethodCallback?
     var connectedCallback:DDPConnectedCallback?
     var callback:DDPCallback?
@@ -45,31 +45,31 @@ public struct Completion {
         self.callback = callback
     }
     
-    func execute(result:AnyObject?, error:DDPError?) {
+    func execute(_ result:AnyObject?, error:DDPError?) {
         
         if let callback = methodCallback {
             if let queue = executionQueue {
-                queue.addOperationWithBlock() {
-                    callback(result: result, error: error)
+                queue.addOperation() {
+                    callback(result, error)
                 }
             } else {
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
-                    callback(result: result, error: error)
+                OperationQueue.main.addOperation() {
+                    callback(result, error)
                 }
             }
         }
     }
     
-    func execute(session:String) {
+    func execute(_ session:String) {
         
         if let callback = connectedCallback {
             if let queue = executionQueue {
-                queue.addOperationWithBlock() {
-                    callback(session: session)
+                queue.addOperation() {
+                    callback(session)
                 }
             } else {
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
-                    callback(session: session)
+                OperationQueue.main.addOperation() {
+                    callback(session)
                 }
             }
         }
@@ -79,11 +79,11 @@ public struct Completion {
         
         if let callback = self.callback {
             if let queue = executionQueue {
-                queue.addOperationWithBlock() {
+                queue.addOperation() {
                     callback()
                 }
             } else {
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                OperationQueue.main.addOperation() {
                     callback()
                 }
             }

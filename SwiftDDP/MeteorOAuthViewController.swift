@@ -52,15 +52,15 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
         }
         
         
-        cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "close")
+        cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MeteorOAuthDialogViewController.close))
         navigationItem.rightBarButtonItem = cancelButton
         navigationBar!.items = [navigationItem]
                 
         // Configure WebView
-        let request = NSURLRequest(URL:url)
+        let request = URLRequest(url:url as URL)
         webView = WKWebView()
         webView.navigationDelegate = self
-        webView.loadRequest(request)
+        webView.load(request)
         
         self.view.addSubview(webView)
         self.view.addSubview(navigationBar)
@@ -68,18 +68,18 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64)
-        webView.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)
+        navigationBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 64)
+        webView.frame = CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height - 64)
     }
     
     func close() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     func signIn(token: String, secret: String) {
         let params = ["oauth":["credentialToken": token, "credentialSecret": secret]]
-        Meteor.client.login(params) { result, error in
+        Meteor.client.login(params as NSDictionary) { result, error in
             print("Meteor login attempt \(result), \(error)")
             self.close()
         }
@@ -92,23 +92,23 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
     //
     
     /* Start the network activity indicator when the web view is loading */
-    public func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     /* Stop the network activity indicator when the loading finishes */
-    public func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation){
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation){
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         
         // This works to get the credentialSecret, credentialToken, redirectUrl etc.
         webView.evaluateJavaScript("JSON.parse(document.getElementById('config').innerHTML)",
-            completionHandler: { (html: AnyObject?, error: NSError?) in
-                if let json = html {
+            completionHandler: { (html: Any?, error: Error?) in
+                if let json = html as? NSDictionary {
                     if let secret = json["credentialSecret"] as? String,
-                        token = json["credentialToken"] as? String {
+                        let token = json["credentialToken"] as? String {
                             webView.stopLoading() // Is there a possible race condition here?
-                            self.signIn(token, secret: secret)
+                            self.signIn(token: token, secret: secret)
                     }
                 } else {
                     print("There was no json here")

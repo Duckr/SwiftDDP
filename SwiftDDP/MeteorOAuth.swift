@@ -25,7 +25,7 @@ public class MeteorOAuth {
     static let meteor = Meteor.client
     
     static var httpUrl:String = {
-        let url = MeteorOAuth.getHTTPUrl(Meteor.client.url)
+        let url = MeteorOAuth.getHTTPUrl(websocketUrl: Meteor.client.url)
         return url
     }()
     
@@ -33,9 +33,9 @@ public class MeteorOAuth {
     static func getHTTPUrl(websocketUrl: String) -> String {
         // remove websocket; should rewrite this so that it takes only
         // websocket from the end of the string
-        let path = websocketUrl.componentsSeparatedByString("/websocket")[0]
+        let path = websocketUrl.components(separatedBy: "/websocket")[0]
         
-        let components = path.componentsSeparatedByString("://")
+        let components = path.components(separatedBy: "://")
         let applicationLayerProtocol = components[0]
         
         assert(applicationLayerProtocol == "ws" || applicationLayerProtocol == "wss")
