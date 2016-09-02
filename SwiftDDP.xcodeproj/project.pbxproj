@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6FFFCBC71C64352300C147F2 /* DDPExponentialBackoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFCBC61C64352300C147F2 /* DDPExponentialBackoff.swift */; };
+		A864BBB11D79C23C00FB55BC /* MeteorOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864BBAF1D79C23C00FB55BC /* MeteorOAuth.swift */; };
+		A864BBB21D79C23C00FB55BC /* MeteorOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864BBB01D79C23C00FB55BC /* MeteorOAuthViewController.swift */; };
 		AA0D2AC61D6BEEC700085B33 /* SwiftDDP-tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0D2AC51D6BEEC700085B33 /* SwiftDDP-tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA0D2ACB1D6BF0F500085B33 /* DDPExponentialBackoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFCBC61C64352300C147F2 /* DDPExponentialBackoff.swift */; };
 		AA0D2ACC1D6BF0F500085B33 /* DDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A720B1BBEFCD200940C17 /* DDPClient.swift */; };
@@ -79,6 +81,8 @@
 
 /* Begin PBXFileReference section */
 		6FFFCBC61C64352300C147F2 /* DDPExponentialBackoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPExponentialBackoff.swift; sourceTree = "<group>"; };
+		A864BBAF1D79C23C00FB55BC /* MeteorOAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeteorOAuth.swift; sourceTree = "<group>"; };
+		A864BBB01D79C23C00FB55BC /* MeteorOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeteorOAuthViewController.swift; sourceTree = "<group>"; };
 		AA0D2AC31D6BEEC700085B33 /* SwiftDDP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDDP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0D2AC51D6BEEC700085B33 /* SwiftDDP-tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDDP-tvOS.h"; sourceTree = "<group>"; };
 		AA0D2AC71D6BEEC700085B33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 				D0339DD31C00DAB000A17DEB /* MeteorCollection.swift */,
 				D04D0DB81C21D489000244D6 /* MeteorDocument.swift */,
 				D0F6C99C1BFFA04600A6CB70 /* EJSON.swift */,
+				A864BBAF1D79C23C00FB55BC /* MeteorOAuth.swift */,
+				A864BBB01D79C23C00FB55BC /* MeteorOAuthViewController.swift */,
 				D02A71E11BBEFBCA00940C17 /* Info.plist */,
 			);
 			path = SwiftDDP;
@@ -542,6 +548,8 @@
 				D04D0DB91C21D489000244D6 /* MeteorDocument.swift in Sources */,
 				D02A72121BBEFCD300940C17 /* DDPExtensions.swift in Sources */,
 				6FFFCBC71C64352300C147F2 /* DDPExponentialBackoff.swift in Sources */,
+				A864BBB21D79C23C00FB55BC /* MeteorOAuthViewController.swift in Sources */,
+				A864BBB11D79C23C00FB55BC /* MeteorOAuth.swift in Sources */,
 				D0C71B561BC172F40089B6CE /* Meteor.swift in Sources */,
 				D02A72131BBEFCD300940C17 /* DDPEvents.swift in Sources */,
 			);
