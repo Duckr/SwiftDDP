@@ -74,7 +74,7 @@ public struct DDPMessage {
     The message's properties, stored as an NSDictionary
     */
     
-    public var json:NSDictionary!
+    public var json:[String : Any]!
     
     /**
     Initialize a message struct, with a Json string
@@ -94,7 +94,7 @@ public struct DDPMessage {
     */
     
     public init(message:[String:String]) {
-        json = message as NSDictionary
+        json = message as [String : String]
     }
     
     /**
@@ -137,7 +137,7 @@ public struct DDPMessage {
     
     // Returns the root-level keys of the JSON object
     internal var keys:[String] {
-        return json.allKeys as! [String]
+        return [String](json.keys)
     }
     
     public func hasProperty(_ name:String) -> Bool {
@@ -208,7 +208,7 @@ public struct DDPMessage {
     */
     
     public var error:DDPError? {
-        get { if let e = json["error"] as? NSDictionary { return DDPError(json:e) } else { return nil }}
+        get { if let e = json["error"] as? [String : Any] { return DDPError(json:e) } else { return nil }}
     }
     
     /**
@@ -223,8 +223,8 @@ public struct DDPMessage {
     The optional DDP fields dictionary
     */
     
-    public var fields:NSDictionary? {
-        get { return json["fields"] as? NSDictionary }
+    public var fields:[String : Any]? {
+        get { return json["fields"] as? [String : Any] }
     }
     
     /**
@@ -299,7 +299,7 @@ A struct encapsulating a DDP error message
 
 public struct DDPError: Error {
     
-    fileprivate var json:NSDictionary?
+    fileprivate var json:[String : Any]?
     
     /**
     The string error code
@@ -335,7 +335,7 @@ public struct DDPError: Error {
         return false
     }
     
-    init(json:AnyObject?) {
-        self.json = json as? NSDictionary
+    init(json:[String : Any]?) {
+        self.json = json as [String : Any]?
     }
 }

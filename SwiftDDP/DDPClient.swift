@@ -248,9 +248,11 @@ open class DDPClient: NSObject {
     fileprivate func pong(_ ping: DDPMessage) {
         heartbeat.addOperation() {
             self.server.ping = Date()
-            var response = ["msg":"pong"]
-            if let id = ping.id { response["id"] = id }
-            self.sendMessage(response as NSDictionary)
+            var response = ["msg":"pong"] as [String : Any]
+            if let id = ping.id {
+                response["id"] = id
+            }
+            self.sendMessage(response)
         }
     }
     
@@ -338,7 +340,7 @@ open class DDPClient: NSObject {
         }
     }
     
-    fileprivate func sendMessage(_ message:NSDictionary) {
+    fileprivate func sendMessage(_ message:[String : Any]) {
         if let m = message.stringValue() {
             self.socket.send(m)
         }
@@ -357,8 +359,10 @@ open class DDPClient: NSObject {
     
     open func method(_ name: String, params: AnyObject?, callback: DDPMethodCallback?) -> String {
         let id = getId()
-        let message = ["msg":"method", "method":name, "id":id] as NSMutableDictionary
-        if let p = params { message["params"] = p }
+        var message = ["msg":"method", "method":name, "id":id] as [String : Any]
+        if let p = params {
+            message["params"] = p
+        }
         
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
@@ -383,8 +387,10 @@ open class DDPClient: NSObject {
         }
         
         self.subscriptions[id] = (id, name, false)
-        let message = ["msg":"sub", "name":name, "id":id] as NSMutableDictionary
-        if let p = params { message["params"] = p }
+        var message = ["msg":"sub", "name":name, "id":id] as [String : Any]
+        if let p = params {
+            message["params"] = p
+        }
         userBackground.addOperation() {
             self.sendMessage(message)
         }
@@ -533,7 +539,7 @@ open class DDPClient: NSObject {
      - parameter fields:                     The documents properties
      */
     
-    open func documentWasAdded(_ collection:String, id:String, fields:NSDictionary?) {
+    open func documentWasAdded(_ collection:String, id:String, fields:[String : Any]?) {
         if let added = events.onAdded { added(collection, id, fields) }
     }
     
@@ -557,8 +563,8 @@ open class DDPClient: NSObject {
      - parameter cleared:                    Optional array of strings (field names to delete)
      */
     
-    open func documentWasChanged(_ collection:String, id:String, fields:NSDictionary?, cleared:[String]?) {
-        if let changed = events.onChanged { changed(collection, id, fields, cleared as NSArray?) }
+    open func documentWasChanged(_ collection:String, id:String, fields:[String : Any]?, cleared:[String]?) {
+        if let changed = events.onChanged { changed(collection, id, fields, cleared as [String]?) }
     }
     
     /**

@@ -161,14 +161,14 @@ class DDPServerTests:QuickSpec {
                 // After logging in with a username and password, the client should receive a result
                 // object that the session token
                 
-                var testResult:NSDictionary!
+                var testResult:[String : Any]!
                 var testSession:String!
                 
                 let client = DDPClient()
                 client.connect(url) { session in
                     testSession = session
                     client.loginWithPassword(user, password: pass) { result, e in
-                        testResult = result! as! NSDictionary
+                        testResult = result! as! [String : Any]
                     }
                 }
                 
@@ -184,7 +184,7 @@ class DDPServerTests:QuickSpec {
             }
             
             it ("can add and remove a document on the server"){
-                var added = [NSDictionary]()
+                var added = [[String : Any]]()
                 var removed = [String]()
                 let client = DDPClient()
                 let _id = client.getId()
@@ -217,8 +217,8 @@ class DDPServerTests:QuickSpec {
             }
             
             it ("can update a document in a collection") {
-                var added = [NSDictionary]()
-                var updated = [NSDictionary]()
+                var added = [[String : Any]]()
+                var updated = [[String : Any]]()
                 let client = DDPClient()
                 
                 let _id = client.getId()
@@ -246,7 +246,7 @@ class DDPServerTests:QuickSpec {
                 }
                 
                 expect(added.count).toEventually(equal(1), timeout:10)
-                var params = NSMutableDictionary()
+                var params = [String : Any]()
                 params = ["$set":["foo":"baz"]]
                 client.update("test-collection2", document: [["_id":_id], params]) { result, error in }
                 expect(updated.count).toEventually(equal(1))

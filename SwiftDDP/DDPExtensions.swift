@@ -40,16 +40,16 @@ private let syncWarning = {(name:String) -> Void in
 }
 
 extension String {
-    func dictionaryValue() -> NSDictionary? {
+    func dictionaryValue() -> [String : Any]? {
         if let data = self.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-            let dictionary = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! NSDictionary
+            let dictionary = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! [String : Any]
             return dictionary
         }
         return nil
     }
 }
 
-extension NSDictionary {
+extension Dictionary {
     func stringValue() -> String? {
         if let data = try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions(rawValue: 0)) {
             return String(data: data, encoding: String.Encoding.utf8)
@@ -113,7 +113,7 @@ extension DDPClient {
     - parameter callback:   A closure with result and error arguments describing the result of the operation
     */
     
-    public func insert(_ collection: String, document: NSArray, callback: DDPMethodCallback?) -> String {
+    public func insert(_ collection: String, document: AnyObject?, callback: DDPMethodCallback?) -> String {
         let arg = "/\(collection)/insert"
         return self.method(arg, params: document, callback: callback)
     }
@@ -125,7 +125,7 @@ extension DDPClient {
     - parameter document:   An NSArray of documents to insert
     */
     
-    public func insert(_ collection: String, document: NSArray) -> String {
+    public func insert(_ collection: String, document: AnyObject?) -> String {
         return insert(collection, document: document, callback:nil)
     }
     
@@ -136,7 +136,7 @@ extension DDPClient {
     - parameter document:   An NSArray of documents to insert
     */
     
-    public func insert(sync collection: String, document: NSArray) -> Result {
+    public func insert(sync collection: String, document: AnyObject?) -> Result {
         
         syncWarning("Insert")
         
@@ -162,7 +162,7 @@ extension DDPClient {
     - parameter callback:   A closure with result and error arguments describing the result of the operation
     */
     
-    public func update(_ collection: String, document: NSArray, callback: DDPMethodCallback?) -> String {
+    public func update(_ collection: String, document: AnyObject?, callback: DDPMethodCallback?) -> String {
         let arg = "/\(collection)/update"
         return method(arg, params: document, callback: callback)
     }
@@ -174,7 +174,7 @@ extension DDPClient {
     - parameter document:   An NSArray of documents to update
     */
     
-    public func update(_ collection: String, document: NSArray) -> String {
+    public func update(_ collection: String, document: AnyObject?) -> String {
         return update(collection, document: document, callback:nil)
     }
     
@@ -185,7 +185,7 @@ extension DDPClient {
     - parameter document:   An NSArray of documents to update
     */
     
-    public func update(sync collection: String, document: NSArray) -> Result {
+    public func update(sync collection: String, document: AnyObject?) -> Result {
         syncWarning("Update")
         
         let semaphore = DispatchSemaphore(value: 0)
@@ -210,7 +210,7 @@ extension DDPClient {
     - parameter callback:   A closure with result and error arguments describing the result of the operation
     */
     
-    public func remove(_ collection: String, document: NSArray, callback: DDPMethodCallback?) -> String {
+    public func remove(_ collection: String, document: AnyObject?, callback: DDPMethodCallback?) -> String {
         let arg = "/\(collection)/remove"
         return method(arg, params: document, callback: callback)
     }
@@ -222,7 +222,7 @@ extension DDPClient {
     - parameter document:   An NSArray of documents to remove
     */
     
-    public func remove(_ collection: String, document: NSArray) -> String  {
+    public func remove(_ collection: String, document: AnyObject?) -> String  {
         return remove(collection, document: document, callback:nil)
     }
     
@@ -233,7 +233,7 @@ extension DDPClient {
     - parameter document:   An NSArray of documents to remove
     */
     
-    public func remove(sync collection: String, document: NSArray) -> Result {
+    public func remove(sync collection: String, document: AnyObject?) -> Result {
         syncWarning("Remove")
         
         let semaphore = DispatchSemaphore(value: 0)
@@ -251,13 +251,13 @@ extension DDPClient {
     }
     
     // Callback runs on main thread
-    public func login(_ params: NSDictionary, callback: ((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
+    public func login(_ params: AnyObject?, callback: ((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
         
         // method is run on the userBackground queue
-        method("login", params: NSArray(arrayLiteral: params)) { result, error in
+        method("login", params: params) { result, error in
             guard let e = error , (e.isValid == true) else {
                 
-                if let user = params["user"] as? NSDictionary {
+                if let user = params?["user"] as? [String : Any] {
                     if let email = user["email"] {
                         self.userData.set(email, forKey: DDP_EMAIL)
                     }
@@ -266,10 +266,10 @@ extension DDPClient {
                     }
                 }
                 
-                if let data = result as? NSDictionary,
+                if let data = result as? [String : Any],
                     let id = data["id"] as? String,
                     let token = data["token"] as? String,
-                    let tokenExpires = data["tokenExpires"] as? NSDictionary {
+                    let tokenExpires = data["tokenExpires"] as? [String : Any] {
                         let expiration = dateFromTimestamp(tokenExpires)
                         self.userData.set(id, forKey: DDP_ID)
                         self.userData.set(token, forKey: DDP_TOKEN)
@@ -307,7 +307,7 @@ extension DDPClient {
     
     public func loginWithPassword(_ email: String, password: String, callback: DDPMethodCallback?) {
         if !(loginWithToken(callback)) {
-            let params = ["user": ["email": email], "password":["digest": password.sha256(), "algorithm":"sha-256"]] as NSDictionary
+            let params = ["user": ["email": email], "password":["digest": password.sha256(), "algorithm":"sha-256"]] as AnyObject
             login(params, callback: callback)
         }
     }
@@ -322,7 +322,7 @@ extension DDPClient {
     
     public func loginWithUsername(_ username: String, password: String, callback: DDPMethodCallback?) {
         if !(loginWithToken(callback)) {
-            let params = ["user": ["username": username], "password":["digest": password.sha256(), "algorithm":"sha-256"]] as NSDictionary
+            let params = ["user": ["username": username], "password":["digest": password.sha256(), "algorithm":"sha-256"]] as AnyObject
             login(params, callback: callback)
         }
     }
@@ -338,7 +338,7 @@ extension DDPClient {
             let tokenDate = userData.object(forKey: DDP_TOKEN_EXPIRES) {
                 print("Found token & token expires \(token), \(tokenDate)")
                 if ((tokenDate as AnyObject).compare(Date()) == ComparisonResult.orderedDescending) {
-                    let params = ["resume":token] as NSDictionary
+                    let params = ["resume":token]  as AnyObject
                     login(params, callback:callback)
                     return true
                 }
@@ -347,8 +347,8 @@ extension DDPClient {
     }
     
     
-    public func signup(_ params:NSDictionary, callback:((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
-        method("createUser", params: NSArray(arrayLiteral: params)) { result, error in
+    public func signup(_ params:AnyObject, callback:((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
+        method("createUser", params: params ) { result, error in
             guard let e = error , (e.isValid == true) else {
                 
                 if let email = params["email"] {
@@ -359,10 +359,10 @@ extension DDPClient {
                     self.userData.set(username, forKey: DDP_USERNAME)
                 }
                 
-                if let data = result as? NSDictionary,
+                if let data = result as? [String : Any],
                     let id = data["id"] as? String,
                     let token = data["token"] as? String,
-                    let tokenExpires = data["tokenExpires"] as? NSDictionary {
+                    let tokenExpires = data["tokenExpires"] as? [String : Any] {
                         let expiration = dateFromTimestamp(tokenExpires)
                         self.userData.set(id, forKey: DDP_ID)
                         self.userData.set(token, forKey: DDP_TOKEN)
@@ -384,32 +384,32 @@ extension DDPClient {
     */
     
     public func signupWithEmail(_ email: String, password: String, callback: ((_ result:AnyObject?, _ error:DDPError?) -> ())?) {
-        let params = ["email":email, "password":["digest":password.sha256(), "algorithm":"sha-256"]] as [String : Any]
-        signup(params as NSDictionary, callback: callback)
+        let params = ["email":email, "password":["digest":password.sha256(), "algorithm":"sha-256"]] as AnyObject
+        signup(params, callback: callback)
     }
     
     /**
     Invokes a Meteor method to create a user account with a given email and password, and a NSDictionary containing a user profile
     */
     
-    public func signupWithEmail(_ email: String, password: String, profile: NSDictionary, callback: ((_ result:AnyObject?, _ error:DDPError?) -> ())?) {
-        let params = ["email":email, "password":["digest":password.sha256(), "algorithm":"sha-256"], "profile":profile] as [String : Any]
-        signup(params as NSDictionary, callback: callback)
+    public func signupWithEmail(_ email: String, password: String, profile: [String : Any], callback: ((_ result:AnyObject?, _ error:DDPError?) -> ())?) {
+        let params = ["email":email, "password":["digest":password.sha256(), "algorithm":"sha-256"], "profile":profile] as AnyObject
+        signup(params, callback: callback)
     }
     
     /**
      Invokes a Meteor method to create a user account with a given username, email and password, and a NSDictionary containing a user profile
      */
     
-    public func signupWithUsername(_ username: String, password: String, email: String?, profile: NSDictionary?, callback: ((_ result:AnyObject?, _ error:DDPError?) -> ())?) {
-        let params: NSMutableDictionary = ["username":username, "password":["digest":password.sha256(), "algorithm":"sha-256"]]
+    public func signupWithUsername(_ username: String, password: String, email: String?, profile: [String : Any]?, callback: ((_ result:AnyObject?, _ error:DDPError?) -> ())?) {
+        var params: [String : Any] = ["username":username, "password":["digest":password.sha256(), "algorithm":"sha-256"]]
         if let email = email {
-            params.setValue(email, forKey: "email")
+            params["email"] = email
         }
         if let profile = profile {
-            params.setValue(profile, forKey: "profile")
+            params["profile"] = profile
         }
-        signup(params, callback: callback)
+        signup(params as AnyObject, callback: callback)
     }
     
     /**

@@ -43,7 +43,7 @@ open class AbstractCollection: NSObject, MeteorCollectionType {
     - parameter fields:         an optional NSDictionary with the documents properties
     */
     
-    open func documentWasAdded(_ collection:String, id:String, fields:NSDictionary?) {}
+    open func documentWasAdded(_ collection:String, id:String, fields:[String : Any]?) {}
     
     /**
     Invoked when a document has been changed on the server.
@@ -54,7 +54,7 @@ open class AbstractCollection: NSObject, MeteorCollectionType {
     - parameter cleared:                    Optional array of strings (field names to delete)
     */
     
-    open func documentWasChanged(_ collection:String, id:String, fields:NSDictionary?, cleared:[String]?) {}
+    open func documentWasChanged(_ collection:String, id:String, fields:[String : Any]?, cleared:[String]?) {}
     
     /**
     Invoked when a document has been removed on the server.

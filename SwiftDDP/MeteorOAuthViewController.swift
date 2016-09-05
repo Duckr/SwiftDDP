@@ -78,8 +78,8 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
     
     
     func signIn(token: String, secret: String) {
-        let params = ["oauth":["credentialToken": token, "credentialSecret": secret]]
-        Meteor.client.login(params as NSDictionary) { result, error in
+        let params = ["oauth":["credentialToken": token, "credentialSecret": secret]] as [String : Any]
+        Meteor.client.login(params as AnyObject) { result, error in
             print("Meteor login attempt \(result), \(error)")
             self.close()
         }
@@ -104,7 +104,7 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
         // This works to get the credentialSecret, credentialToken, redirectUrl etc.
         webView.evaluateJavaScript("JSON.parse(document.getElementById('config').innerHTML)",
             completionHandler: { (html: Any?, error: Error?) in
-                if let json = html as? NSDictionary {
+                if let json = html as? [String : Any] {
                     if let secret = json["credentialSecret"] as? String,
                         let token = json["credentialToken"] as? String {
                             webView.stopLoading() // Is there a possible race condition here?

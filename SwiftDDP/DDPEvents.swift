@@ -76,7 +76,7 @@ public struct DDPEvents {
     - parameter fields:         an optional NSDictionary with the documents properties
     */
     
-    public var onAdded:             ((_ collection:String, _ id:String, _ fields:NSDictionary?) -> ())?
+    public var onAdded:             ((_ collection:String, _ id:String, _ fields:[String : Any]?) -> ())?
     
     /**
     onChanged executes when the server sends an instruction to modify a local document
@@ -88,7 +88,7 @@ public struct DDPEvents {
     - parameter cleared:        an optional array of string property names to delete
     */
     
-    public var onChanged:           ((_ collection:String, _ id:String, _ fields:NSDictionary?, _ cleared:NSArray?) -> ())?
+    public var onChanged:           ((_ collection:String, _ id:String, _ fields:[String : Any]?, _ cleared:[String]?) -> ())?
     
     /**
     onRemoved executes when the server sends an instruction to remove a document from the local collection

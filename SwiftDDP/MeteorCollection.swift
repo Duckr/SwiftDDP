@@ -106,7 +106,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
     - parameter fields:         an optional NSDictionary with the documents properties
     */
     
-    open override func documentWasAdded(_ collection:String, id:String, fields:NSDictionary?) {
+    open override func documentWasAdded(_ collection:String, id:String, fields:[String : Any]?) {
         let document = T(id: id, fields: fields)
         self.documents[id] = document
         collectionSetDidChange()
@@ -121,7 +121,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
     - parameter cleared:                    Optional array of strings (field names to delete)
     */
     
-    open override func documentWasChanged(_ collection:String, id:String, fields:NSDictionary?, cleared:[String]?) {
+    open override func documentWasChanged(_ collection:String, id:String, fields:[String : Any]?, cleared:[String]?) {
         if let document = documents[id] {
             document.update(fields, cleared: cleared)
             self.documents[id] = document
@@ -153,7 +153,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = document
         collectionSetDidChange()
 
-        client.insert(self.name, document: [document.fields()]) { result, error in
+        client.insert(self.name, document: document.fields() as AnyObject) { result, error in
             
             if error != nil {
                 self.documents[document._id] = nil
@@ -178,7 +178,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = document
         collectionSetDidChange()
         
-        client.update(self.name, document: [["_id":document._id], operation]) { result, error in
+        client.update(self.name, document: [["_id":document._id] as AnyObject, operation as AnyObject] as AnyObject) { result, error in
             
             if error != nil {
                 self.documents[document._id] = originalDocument
@@ -204,7 +204,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
 
         let fields = document.fields()
         
-        client.update(self.name, document: [["_id":document._id],["$set":fields]]) { result, error in
+        client.update(self.name, document: [["_id":document._id] as AnyObject,["$set":fields] as AnyObject] as AnyObject) { result, error in
             
             if error != nil {
                 self.documents[document._id] = originalDocument
@@ -225,7 +225,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = nil
         collectionSetDidChange()
 
-        client.remove(self.name, document: [["_id":document._id]]) { result, error in
+        client.remove(self.name, document: [["_id":document._id] as AnyObject] as AnyObject) { result, error in
             
             if error != nil {
                 self.documents[document._id] = document

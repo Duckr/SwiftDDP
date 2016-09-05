@@ -34,8 +34,8 @@ enum Error: String {
 */
 
 public protocol MeteorCollectionType {
-    func documentWasAdded(_ collection:String, id:String, fields:NSDictionary?)
-    func documentWasChanged(_ collection:String, id:String, fields:NSDictionary?, cleared:[String]?)
+    func documentWasAdded(_ collection:String, id:String, fields:[String : Any]?)
+    func documentWasChanged(_ collection:String, id:String, fields:[String : Any]?, cleared:[String]?)
     func documentWasRemoved(_ collection:String, id:String)
 }
 
@@ -153,7 +153,7 @@ open class Meteor {
         client.connect(url) { session in
             client.loginWithPassword(email, password: password) { result, error in
                 guard let _ = error else {
-                    if let _ = result as? NSDictionary {
+                    if let _ = result as? [String : Any] {
                         // client.userDidLogin(credentials)
                     }
                     return
@@ -207,7 +207,7 @@ open class Meteor {
      
      */
     
-    open static func signupWithEmail(_ email: String, password: String, profile: NSDictionary, callback: DDPMethodCallback?) {
+    open static func signupWithEmail(_ email: String, password: String, profile: [String : Any], callback: DDPMethodCallback?) {
         client.signupWithEmail(email, password: password, profile: profile, callback: callback)
     }
     
@@ -222,7 +222,7 @@ open class Meteor {
      
      */
     
-    open static func signupWithUsername(_ username: String, password: String, email: String? = nil, profile: NSDictionary? = nil, callback: DDPMethodCallback? = nil) {
+    open static func signupWithUsername(_ username: String, password: String, email: String? = nil, profile: [String : Any]? = nil, callback: DDPMethodCallback? = nil) {
         client.signupWithUsername(username, password: password, email: email, profile: profile, callback: callback)
     }
     
@@ -378,7 +378,7 @@ open class Meteor {
         - parameter fields:         an optional NSDictionary with the documents properties
         */
         
-        open override func documentWasAdded(_ collection:String, id:String, fields:NSDictionary?) {
+        open override func documentWasAdded(_ collection:String, id:String, fields:[String : Any]?) {
             if let meteorCollection = Meteor.collections[collection] {
                 meteorCollection.documentWasAdded(collection, id: id, fields: fields)
             }
@@ -394,7 +394,7 @@ open class Meteor {
         - parameter cleared:        an optional array of string property names to delete
         */
         
-        open override func documentWasChanged(_ collection:String, id:String, fields:NSDictionary?, cleared:[String]?) {
+        open override func documentWasChanged(_ collection:String, id:String, fields:[String : Any]?, cleared:[String]?) {
             if let meteorCollection = Meteor.collections[collection] {
                 meteorCollection.documentWasChanged(collection, id: id, fields: fields, cleared: cleared)
             }

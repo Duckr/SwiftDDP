@@ -24,23 +24,23 @@ open class MeteorDocument: NSObject {
     
     var _id:String
     
-    required public init(id: String, fields: NSDictionary?) {
+    required public init(id: String, fields: [String : Any]?) {
         self._id = id
         super.init()
         if let properties = fields {
             for (key,value) in properties  {
                 if !(value as AnyObject).isEqual(NSNull()) {
-                    self.setValue(value, forKey: key as! String)
+                    self.setValue(value, forKey: key )
                 }
             }
         }
     }
     
-    open func update(_ fields: NSDictionary?, cleared: [String]?) {
+    open func update(_ fields: [String : Any]?, cleared: [String]?) {
         if let properties = fields {
             for (key,value) in properties  {
                 print("Key: \(key), Value: \(value)")
-                self.setValue(value, forKey: key as! String)
+                self.setValue(value, forKey: key )
             }
         }
         
@@ -67,8 +67,8 @@ open class MeteorDocument: NSObject {
     /*
     This method should be public so users of this library can override it for parsing their variables in their MeteorDocument object when having structs and such in their Document.
     */
-    open func fields() -> NSDictionary {
-        let fieldsDict = NSMutableDictionary()
+    open func fields() -> [String : Any] {
+        var fieldsDict = [String : Any]()
         let properties = propertyNames()
         
         for name in properties {
@@ -78,13 +78,13 @@ open class MeteorDocument: NSObject {
                     value = EJSON.convertToEJSONDate(value as! Date)
                 }
                 
-                fieldsDict.setValue(value, forKey: name)
+                fieldsDict[name] = value
             }
         }
         
-        fieldsDict.setValue(self._id, forKey: "_id")
+        fieldsDict["_id"] = self._id
         print("fields \(fieldsDict)")
-        return fieldsDict as NSDictionary
+        return fieldsDict as [String : Any]
     }
     
 }
