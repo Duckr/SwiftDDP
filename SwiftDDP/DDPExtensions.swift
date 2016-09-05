@@ -254,7 +254,12 @@ extension DDPClient {
     public func login(_ params: AnyObject?, callback: ((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
         
         // method is run on the userBackground queue
-        method("login", params: params) { result, error in
+        var array = [AnyObject]()
+        if let params = params {
+            array.append(params)
+        }
+        
+        method("login", params: array as AnyObject?) { result, error in
             guard let e = error , (e.isValid == true) else {
                 
                 if let user = params?["user"] as? [String : Any] {
