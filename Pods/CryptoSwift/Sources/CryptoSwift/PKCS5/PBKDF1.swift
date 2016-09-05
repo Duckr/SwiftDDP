@@ -26,18 +26,18 @@ public extension PKCS5 {
             var size:Int {
                 switch (self) {
                 case .md5:
-                    return MD5.size
+                    return MD5.digestSize
                 case .sha1:
-                    return SHA1.size
+                    return SHA1.digestSize
                 }
             }
 
             fileprivate func calculateHash(_ bytes:Array<UInt8>) -> Array<UInt8>? {
                 switch (self) {
                 case .sha1:
-                    return Hash.sha1(bytes)
+                    return Digest.sha1(bytes)
                 case .md5:
-                    return Hash.md5(bytes)
+                    return Digest.md5(bytes)
                 }
             }
         }

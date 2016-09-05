@@ -15,39 +15,41 @@ final public class HMAC: Authenticator {
     public enum Variant {
         case sha1, sha256, sha384, sha512, md5
         
-        var size:Int {
+        var digestSize:Int {
             switch (self) {
             case .sha1:
-                return SHA1.size
+                return SHA1.digestSize
             case .sha256:
-                return SHA2.Variant.sha256.size
+                return SHA2.Variant.sha256.digestSize
             case .sha384:
-                return SHA2.Variant.sha384.size
+                return SHA2.Variant.sha384.digestSize
             case .sha512:
-                return SHA2.Variant.sha512.size
+                return SHA2.Variant.sha512.digestSize
             case .md5:
-                return MD5.size
+                return MD5.digestSize
             }
         }
-        
+
         func calculateHash(_ bytes:Array<UInt8>) -> Array<UInt8>? {
             switch (self) {
             case .sha1:
-                return Hash.sha1(bytes)
+                return Digest.sha1(bytes)
             case .sha256:
-                return Hash.sha256(bytes)
+                return Digest.sha256(bytes)
             case .sha384:
-                return Hash.sha384(bytes)
+                return Digest.sha384(bytes)
             case .sha512:
-                return Hash.sha512(bytes)
+                return Digest.sha512(bytes)
             case .md5:
-                return Hash.md5(bytes)
+                return Digest.md5(bytes)
             }
         }
         
         func blockSize() -> Int {
             switch self {
-            case .md5, .sha1, .sha256:
+            case .md5:
+                return MD5.blockSize
+            case .sha1, .sha256:
                 return 64
             case .sha384, .sha512:
                 return 128
@@ -68,6 +70,7 @@ final public class HMAC: Authenticator {
             }
         }
 
+        //TODO: validate 64 bytes long key
         self.key = ZeroPadding().add(to: key, blockSize: variant.blockSize())
     }
 
@@ -89,6 +92,7 @@ final public class HMAC: Authenticator {
             throw Error.authenticateError
         }
 
+        // return Array(result[0..<10]) // 80 bits
         return result
     }
 }

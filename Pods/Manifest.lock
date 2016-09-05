@@ -1,11 +1,11 @@
 PODS:
   - CryptoSwift (0.5.2)
   - SwiftWebSocket (2.6.2)
-  - XCGLogger (3.5.1)
+  - XCGLogger (4.0.0-beta.2)
 
 DEPENDENCIES:
   - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift.git`, branch `swift3`)
-  - SwiftWebSocket (from `https://github.com/Duckr/SwiftWebSocket.git`, branch `swift/3.0`)
+  - SwiftWebSocket (from `https://github.com/tidwall/SwiftWebSocket.git`, branch `swift/3.0`)
   - XCGLogger (from `https://github.com/DaveWoodCom/XCGLogger.git`, branch `swift_3.0`)
 
 EXTERNAL SOURCES:
@@ -14,27 +14,27 @@ EXTERNAL SOURCES:
     :git: https://github.com/krzyzanowskim/CryptoSwift.git
   SwiftWebSocket:
     :branch: swift/3.0
-    :git: https://github.com/Duckr/SwiftWebSocket.git
+    :git: https://github.com/tidwall/SwiftWebSocket.git
   XCGLogger:
     :branch: swift_3.0
     :git: https://github.com/DaveWoodCom/XCGLogger.git
 
 CHECKOUT OPTIONS:
   CryptoSwift:
-    :commit: bf92bd91d31812a3f16424151ba5d38636a75b49
+    :commit: d24b4f5133d11c2d196c3de8404a54cf3b1b1859
     :git: https://github.com/krzyzanowskim/CryptoSwift.git
   SwiftWebSocket:
-    :commit: 52cd0026cf6e76df90ff2d8eaab09f31953944d8
-    :git: https://github.com/Duckr/SwiftWebSocket.git
+    :commit: 5bfe9306152ef1c31cf4ee2109b9371d209175d0
+    :git: https://github.com/tidwall/SwiftWebSocket.git
   XCGLogger:
-    :commit: 7dbd62d503bc93bd03a0a11cc72be5e57d9a4274
+    :commit: b83d925d1d926898e981c60fdc75167690575767
     :git: https://github.com/DaveWoodCom/XCGLogger.git
 
 SPEC CHECKSUMS:
   CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   SwiftWebSocket: 2bb9dda75c87f64eaf9768131141857ca8611aac
-  XCGLogger: 7908138c18ee62e9083b13be0e7598c9ccafcd6d
+  XCGLogger: 99dcffff9fa7cc4831c6faef9eb820155e163695
 
-PODFILE CHECKSUM: 79eda32a1fa054b9fcdac64732881e117d0c149c
+PODFILE CHECKSUM: d1fcc1e1e8b22aba944a86c0223149a79a657cd4
 
 COCOAPODS: 1.0.1

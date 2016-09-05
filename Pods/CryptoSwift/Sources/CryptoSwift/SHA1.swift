@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Marcin Krzyzanowski. All rights reserved.
 //
 
-final class SHA1 : HashProtocol {
-    static let size:Int = 20 // 160 / 8
-    let message: Array<UInt8>
+final class SHA1: DigestType {
+    static let digestSize:Int = 20 // 160 / 8
+    private let message: Array<UInt8>
     
     init(_ message: Array<UInt8>) {
         self.message = message
@@ -17,7 +17,7 @@ final class SHA1 : HashProtocol {
     private let h:Array<UInt32> = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0]
         
     func calculate() -> Array<UInt8> {
-        var tmpMessage = self.prepare(64)
+        var tmpMessage = bitPadding(to: self.message, blockSize: 64, allowance: 64 / 8)
         
         // hash values
         var hh = h

@@ -7,9 +7,9 @@ target 'SwiftDDP' do
 
   # Pods for SwiftDDP
 
-pod ‘CryptoSwift’, :git => ‘https://github.com/krzyzanowskim/CryptoSwift.git’, :branch => ‘swift3’
-pod ‘SwiftWebSocket’, :git => ‘https://github.com/Duckr/SwiftWebSocket.git’, :branch => ‘swift/3.0’
-pod ‘XCGLogger’, :git => ‘https://github.com/DaveWoodCom/XCGLogger.git’, :branch => ‘swift_3.0’
+pod 'CryptoSwift', :git => 'https://github.com/krzyzanowskim/CryptoSwift.git', :branch => 'swift3'
+pod 'SwiftWebSocket', :git => 'https://github.com/tidwall/SwiftWebSocket.git', :branch => 'swift/3.0'
+pod 'XCGLogger', :git => 'https://github.com/DaveWoodCom/XCGLogger.git', :branch => 'swift_3.0'
 
   target 'SwiftDDP Tests' do
     inherit! :search_paths

@@ -22,32 +22,32 @@ extension Data {
     }
     
     public func md5() -> Data {
-        let result = Hash.md5(self.bytes)
+        let result = Digest.md5(self.bytes)
         return Data(bytes: result)
     }
 
     public func sha1() -> Data? {
-        let result = Hash.sha1(self.bytes)
+        let result = Digest.sha1(self.bytes)
         return Data(bytes: result)
     }
 
     public func sha224() -> Data? {
-        let result = Hash.sha224(self.bytes)
+        let result = Digest.sha224(self.bytes)
         return Data(bytes: result)
     }
 
     public func sha256() -> Data? {
-        let result = Hash.sha256(self.bytes)
+        let result = Digest.sha256(self.bytes)
         return Data(bytes: result)
     }
 
     public func sha384() -> Data? {
-        let result = Hash.sha384(self.bytes)
+        let result = Digest.sha384(self.bytes)
         return Data(bytes: result)
     }
 
     public func sha512() -> Data? {
-        let result = Hash.sha512(self.bytes)
+        let result = Digest.sha512(self.bytes)
         return Data(bytes: result)
     }
 

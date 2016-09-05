@@ -256,7 +256,7 @@ public struct DDPMessage {
     */
     
     public var result:AnyObject? {
-        get { return json["result"] as? AnyObject}
+        get { return json["result"] as AnyObject?}
     }
     
     /**
