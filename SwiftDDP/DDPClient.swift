@@ -361,7 +361,7 @@ open class DDPClient: NSObject {
         let id = getId()
         var message = ["msg":"method", "method":name, "id":id] as [String : Any]
         if let params = params {
-            if let array = params as [AnyObject] {
+            if let array = params as? [AnyObject] {
                 message["params"] = array
             } else {
                 var array = [AnyObject]()
@@ -390,8 +390,11 @@ open class DDPClient: NSObject {
             let completion = Completion(callback: completionCallback)
             self.subCallbacks[id] = completion
         }
+        self.subscriptions[id] = (id, name, false)
+        var message = ["msg":"sub", "name":name, "id":id] as [String : Any]
+        
         if let params = params {
-            if let array = params as [AnyObject] {
+            if let array = params as? [AnyObject] {
                 message["params"] = array
             } else {
                 var array = [AnyObject]()
@@ -400,8 +403,6 @@ open class DDPClient: NSObject {
             }
         }
         
-        self.subscriptions[id] = (id, name, false)
-        var message = ["msg":"sub", "name":name, "id":id] as [String : Any]
         message["params"] = params
         userBackground.addOperation() {
             self.sendMessage(message)
