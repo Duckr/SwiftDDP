@@ -79,7 +79,7 @@ extension DDPClient {
     - parameter params:     An object containing method arguments, if any
     */
     
-    public func subscribe(_ name:String, params:[AnyObject]) -> String { return sub(name, params:params) }
+    public func subscribe(_ name:String, params:AnyObject) -> String { return sub(name, params:params) }
     
     /**
     Sends a subscription request to the server. If a callback is passed, the callback asynchronously
@@ -91,7 +91,7 @@ extension DDPClient {
     - parameter callback:   The closure to be executed when the server sends a 'ready' message
     */
     
-    public func subscribe(_ name:String, params:[AnyObject]?, callback: DDPCallback?) -> String { return sub(name, params:params, callback:callback) }
+    public func subscribe(_ name:String, params:AnyObject?, callback: DDPCallback?) -> String { return sub(name, params:params, callback:callback) }
     
     /**
     Sends a subscription request to the server. If a callback is passed, the callback asynchronously
@@ -254,12 +254,7 @@ extension DDPClient {
     public func login(_ params: AnyObject?, callback: ((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
         
         // method is run on the userBackground queue
-        var array = [AnyObject]()
-        if let params = params {
-            array.append(params)
-        }
-        
-        method("login", params: array as AnyObject?) { result, error in
+        method("login", params: params) { result, error in
             guard let e = error , (e.isValid == true) else {
                 
                 if let user = params?["user"] as? [String : Any] {

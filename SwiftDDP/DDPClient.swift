@@ -360,9 +360,11 @@ open class DDPClient: NSObject {
     open func method(_ name: String, params: AnyObject?, callback: DDPMethodCallback?) -> String {
         let id = getId()
         var message = ["msg":"method", "method":name, "id":id] as [String : Any]
-        if let p = params {
-            message["params"] = p
+        var array = [AnyObject]()
+        if let params = params {
+            array.append(params)
         }
+        message["params"] = array
         
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
@@ -379,8 +381,11 @@ open class DDPClient: NSObject {
     // Subscribe
     //
     
-    internal func sub(_ id: String, name: String, params: [AnyObject]?, callback: DDPCallback?) -> String {
-        
+    internal func sub(_ id: String, name: String, params: AnyObject?, callback: DDPCallback?) -> String {
+        var array = [AnyObject]()
+        if let params = params {
+            array.append(params)
+        }
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
             self.subCallbacks[id] = completion
@@ -388,9 +393,7 @@ open class DDPClient: NSObject {
         
         self.subscriptions[id] = (id, name, false)
         var message = ["msg":"sub", "name":name, "id":id] as [String : Any]
-        if let p = params {
-            message["params"] = p
-        }
+        message["params"] = array
         userBackground.addOperation() {
             self.sendMessage(message)
         }
@@ -404,7 +407,7 @@ open class DDPClient: NSObject {
      - parameter params:     An object containing method arguments, if any
      */
     
-    open func sub(_ name: String, params: [AnyObject]?) -> String {
+    open func sub(_ name: String, params: AnyObject?) -> String {
         let id = getId()
         return sub(id, name: name, params: params, callback:nil)
     }
@@ -419,7 +422,7 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the server sends a 'ready' message
      */
     
-    open func sub(_ name:String, params: [AnyObject]?, callback: DDPCallback?) -> String {
+    open func sub(_ name:String, params: AnyObject?, callback: DDPCallback?) -> String {
         let id = getId()
         print("Subscribing to ID \(id)")
         return sub(id, name: name, params: params, callback: callback)
