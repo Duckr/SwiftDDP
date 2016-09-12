@@ -33,15 +33,15 @@ public struct Completion {
     var connectedCallback:DDPConnectedCallback?
     var callback:DDPCallback?
     
-    init(callback:DDPMethodCallback) {
+    init(callback:@escaping DDPMethodCallback) {
         methodCallback = callback
     }
     
-    init(callback:DDPConnectedCallback) {
+    init(callback:@escaping DDPConnectedCallback) {
         connectedCallback = callback
     }
     
-    init(callback:DDPCallback) {
+    init(callback:@escaping DDPCallback) {
         self.callback = callback
     }
     
