@@ -1,6 +1,6 @@
 {
   "name": "SwiftWebSocket",
-  "version": "2.6.3",
+  "version": "2.6.2",
   "summary": "A high performance WebSocket client library for Swift.",
   "homepage": "https://github.com/tidwall/SwiftWebSocket",
   "license": {
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/tidwall/SwiftWebSocket.git",
-    "tag": "2.6.3"
+    "tag": "2.6.2"
   },
   "authors": {
     "Josh Baker": "joshbaker77@gmail.com"
