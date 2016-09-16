@@ -79,7 +79,7 @@ extension DDPClient {
     - parameter params:     An object containing method arguments, if any
     */
     
-    public func subscribe(_ name:String, params:[AnyObject]) -> String { return sub(name, params:params) }
+    public func subscribe(_ name:String, params:NSArray) -> String { return sub(name, params:params) }
     
     /**
     Sends a subscription request to the server. If a callback is passed, the callback asynchronously
@@ -91,7 +91,7 @@ extension DDPClient {
     - parameter callback:   The closure to be executed when the server sends a 'ready' message
     */
     
-    public func subscribe(_ name:String, params:[AnyObject]?, callback: DDPCallback?) -> String { return sub(name, params:params, callback:callback) }
+    public func subscribe(_ name:String, params:NSArray?, callback: DDPCallback?) -> String { return sub(name, params:params, callback:callback) }
     
     /**
     Sends a subscription request to the server. If a callback is passed, the callback asynchronously
@@ -143,13 +143,13 @@ extension DDPClient {
         let semaphore = DispatchSemaphore(value: 0)
         var serverResponse = Result()
         
-        insert(collection, document:document) { result, error in
+        _ = insert(collection, document:document) { result, error in
             serverResponse.result = result
             serverResponse.error = error
             semaphore.signal()
         }
         
-        semaphore.wait(timeout: SWIFT_DDP_CALLBACK_DISPATCH_TIME)
+        _ = semaphore.wait(timeout: SWIFT_DDP_CALLBACK_DISPATCH_TIME)
         
         return serverResponse
     }
@@ -191,13 +191,13 @@ extension DDPClient {
         let semaphore = DispatchSemaphore(value: 0)
         var serverResponse = Result()
         
-        update(collection, document:document) { result, error in
+        _ = update(collection, document:document) { result, error in
             serverResponse.result = result
             serverResponse.error = error
             semaphore.signal()
         }
         
-        semaphore.wait(timeout: SWIFT_DDP_CALLBACK_DISPATCH_TIME)
+        _ = semaphore.wait(timeout: SWIFT_DDP_CALLBACK_DISPATCH_TIME)
         
         return serverResponse
     }
@@ -239,13 +239,13 @@ extension DDPClient {
         let semaphore = DispatchSemaphore(value: 0)
         var serverResponse = Result()
         
-        remove(collection, document:document) { result, error in
+        _ = remove(collection, document:document) { result, error in
             serverResponse.result = result
             serverResponse.error = error
             semaphore.signal()
         }
         
-        semaphore.wait(timeout: SWIFT_DDP_CALLBACK_DISPATCH_TIME)
+        _ = semaphore.wait(timeout: SWIFT_DDP_CALLBACK_DISPATCH_TIME)
         
         return serverResponse
     }
@@ -254,7 +254,7 @@ extension DDPClient {
     public func login(_ params: NSDictionary, callback: ((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
         
         // method is run on the userBackground queue
-        method("login", params: NSArray(arrayLiteral: params)) { result, error in
+        _ = method("login", params: NSArray(arrayLiteral: params)) { result, error in
             guard let e = error , (e.isValid == true) else {
                 
                 if let user = params["user"] as? NSDictionary {
@@ -348,7 +348,7 @@ extension DDPClient {
     
     
     public func signup(_ params:NSDictionary, callback:((_ result: AnyObject?, _ error: DDPError?) -> ())?) {
-        method("createUser", params: NSArray(arrayLiteral: params)) { result, error in
+        _ = method("createUser", params: NSArray(arrayLiteral: params)) { result, error in
             guard let e = error , (e.isValid == true) else {
                 
                 if let email = params["email"] {
@@ -460,7 +460,7 @@ extension DDPClient {
     */
     
     public func logout(_ callback:DDPMethodCallback?) {
-        method("logout", params: nil) { result, error in
+        _ = method("logout", params: nil) { result, error in
                 if (error == nil) {
                     self.userMainQueue.addOperation() {
                         let user = self.user()!
@@ -488,7 +488,7 @@ extension DDPClient {
     public func resume(_ url:String, callback:DDPCallback?) {
         connect(url) { session in
             if let _ = self.user() {
-                self.loginWithToken() { result, error in
+                _ = self.loginWithToken() { result, error in
                     if error == nil {
                         log.debug("Resumed previous session at launch")
                         if let completion = callback { completion() }

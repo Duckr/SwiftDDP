@@ -207,13 +207,13 @@ open class DDPClient: NSObject {
                     
                     // let loginServicesSubscriptionCollection = "meteor_accounts_loginServiceConfiguration"
                     let loginServiceConfiguration = "meteor.loginServiceConfiguration"
-                    self.sub(loginServiceConfiguration, params: nil)           // /tools/meteor-services/auth.js line 922
+                    _ = self.sub(loginServiceConfiguration, params: nil)           // /tools/meteor-services/auth.js line 922
                     
                     
                     // Resubscribe to existing subs on connection to ensure continuity
                     self.subscriptions.forEach({ (subscription: (String, (id: String, name: String, ready: Bool))) -> () in
                         if subscription.1.name != loginServiceConfiguration {
-                            self.sub(subscription.1.id, name: subscription.1.name, params: nil, callback: nil)
+                            _ = self.sub(subscription.1.id, name: subscription.1.name, params: nil, callback: nil)
                         }
                     })
                     callback?(session)
@@ -375,7 +375,7 @@ open class DDPClient: NSObject {
     // Subscribe
     //
     
-    internal func sub(_ id: String, name: String, params: [AnyObject]?, callback: DDPCallback?) -> String {
+    internal func sub(_ id: String, name: String, params: NSArray?, callback: DDPCallback?) -> String {
         
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
@@ -398,7 +398,7 @@ open class DDPClient: NSObject {
      - parameter params:     An object containing method arguments, if any
      */
     
-    open func sub(_ name: String, params: [AnyObject]?) -> String {
+    open func sub(_ name: String, params: NSArray?) -> String {
         let id = getId()
         return sub(id, name: name, params: params, callback:nil)
     }
@@ -413,7 +413,7 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the server sends a 'ready' message
      */
     
-    open func sub(_ name:String, params: [AnyObject]?, callback: DDPCallback?) -> String {
+    open func sub(_ name:String, params: NSArray?, callback: DDPCallback?) -> String {
         let id = getId()
         print("Subscribing to ID \(id)")
         return sub(id, name: name, params: params, callback: callback)

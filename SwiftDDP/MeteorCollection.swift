@@ -153,7 +153,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = document
         collectionSetDidChange()
 
-        client.insert(self.name, document: [document.fields()]) { result, error in
+        _ = client.insert(self.name, document: [document.fields()]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = nil
@@ -178,7 +178,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = document
         collectionSetDidChange()
         
-        client.update(self.name, document: [["_id":document._id], operation]) { result, error in
+        _ = client.update(self.name, document: [["_id":document._id], operation]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = originalDocument
@@ -204,7 +204,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
 
         let fields = document.fields()
         
-        client.update(self.name, document: [["_id":document._id],["$set":fields]]) { result, error in
+        _ = client.update(self.name, document: [["_id":document._id],["$set":fields]]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = originalDocument
@@ -225,7 +225,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = nil
         collectionSetDidChange()
 
-        client.remove(self.name, document: [["_id":document._id]]) { result, error in
+        _ = client.remove(self.name, document: [["_id":document._id]]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = document
