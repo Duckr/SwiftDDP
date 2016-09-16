@@ -355,7 +355,7 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the method has been executed
      */
     
-    open func method(_ name: String, params: AnyObject?, callback: DDPMethodCallback?) -> String {
+    open func method(_ name: String, params: NSArray?, callback: DDPMethodCallback?) -> String {
         let id = getId()
         let message = ["msg":"method", "method":name, "id":id] as NSMutableDictionary
         if let p = params { message["params"] = p }
