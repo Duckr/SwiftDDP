@@ -284,7 +284,7 @@ extension DDPClient {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: DDP_USER_DID_LOGIN), object: nil)
 
                     if let _ = self.delegate {
-                        self.delegate!.ddpUserDidLogin(self.user()!)
+                        self.delegate!.ddpUserDidLogin(self.user())
                     }
                     
                 }
@@ -463,7 +463,7 @@ extension DDPClient {
         _ = method("logout", params: nil) { result, error in
                 if (error == nil) {
                     self.userMainQueue.addOperation() {
-                        let user = self.user()!
+                        let user = self.user()
                         if let _ = self.delegate {
                             self.delegate!.ddpUserDidLogout(user)
                         }

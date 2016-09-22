@@ -42,8 +42,8 @@ public typealias DDPCallback = () -> ()
  */
 
 public protocol SwiftDDPDelegate {
-    func ddpUserDidLogin(_ user:String)
-    func ddpUserDidLogout(_ user:String)
+    func ddpUserDidLogin(_ user:String?)
+    func ddpUserDidLogout(_ user:String?)
 }
 
 /**
