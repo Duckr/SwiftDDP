@@ -51,7 +51,7 @@ class DDPExponentialBackoff {
         
         let previousRetryInterval = self.reconnectionRetryInterval
         let newRetryInterval = min(previousRetryInterval! * multiplier,maxWaitInterval)
-        if let previousRetryInterval = previousRetryInterval {
+        if let previousRetryInterval = previousRetryInterval, let maxWaitInterval = maxWaitInterval {
             self.reconnectionRetryInterval = previousRetryInterval < maxWaitInterval ? newRetryInterval: maxWaitInterval
         }
         
