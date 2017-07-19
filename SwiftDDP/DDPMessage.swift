@@ -101,7 +101,7 @@ public struct DDPMessage {
     Converts an NSDictionary to a JSON string
     */
     
-    public static func toString(_ json:NSDictionary) -> String? {
+    public static func toString(_ json:Any) -> String? {
         if let data = try? JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions(rawValue: 0)) {
             let message = NSString(data: data, encoding: String.Encoding.ascii.rawValue) as String?
             return message
@@ -141,7 +141,7 @@ public struct DDPMessage {
     }
     
     public func hasProperty(_ name:String) -> Bool {
-        if let property = json[name] , ((property as! NSObject) != NSNull()) {
+        if let property = json[name], ((property as! NSObject) != NSNull()) {
             return true
         }
         return false
@@ -255,8 +255,8 @@ public struct DDPMessage {
     The optional result object, containing the result of a method call
     */
     
-    public var result:AnyObject? {
-        get { return json["result"] as AnyObject?}
+    public var result:Any? {
+        get { return json.object(forKey: "result") as Any? }
     }
     
     /**
@@ -335,7 +335,7 @@ public struct DDPError: Error {
         return false
     }
     
-    init(json:NSDictionary?) {
-        self.json = json
+    init(json:Any?) {
+        self.json = json as? NSDictionary
     }
 }

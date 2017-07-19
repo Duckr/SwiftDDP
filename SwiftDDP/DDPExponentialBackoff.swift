@@ -38,22 +38,22 @@ class DDPExponentialBackoff {
     }
     
     //Cached original interval time
-    fileprivate var _reconnectionRetryInterval:Double!
+    fileprivate var _reconnectionRetryInterval:Double = 0
     
     
-    fileprivate var reconnectionRetryInterval:Double!
-    fileprivate var maxWaitInterval:Double!
-    fileprivate var multiplier:Double!
+    fileprivate var reconnectionRetryInterval:Double
+    fileprivate var maxWaitInterval:Double
+    fileprivate var multiplier:Double
     
     
     ///Perform a closure with increasing exponential delay time up to a max wait interval
     func createBackoff(_ closure:@escaping ()->()) {
         
         let previousRetryInterval = self.reconnectionRetryInterval
-        let newRetryInterval = min(previousRetryInterval! * multiplier,maxWaitInterval)
-        if let previousRetryInterval = previousRetryInterval, let maxWaitInterval = maxWaitInterval {
-            self.reconnectionRetryInterval = previousRetryInterval < maxWaitInterval ? newRetryInterval: maxWaitInterval
-        }
+        let newRetryInterval = min(previousRetryInterval * multiplier,maxWaitInterval)
+        
+        self.reconnectionRetryInterval = previousRetryInterval < maxWaitInterval ? newRetryInterval: maxWaitInterval
+        
         
         DispatchQueue.main.asyncAfter(
             deadline: DispatchTime.now() + Double(Int64(self.reconnectionRetryInterval * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)

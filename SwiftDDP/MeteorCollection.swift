@@ -24,7 +24,7 @@ public let METEOR_COLLECTION_SET_DID_CHANGE = "METEOR_COLLECTION_SET_DID_CHANGE"
 
 func debounce( _ delay:TimeInterval, queue:DispatchQueue, action: @escaping (()->()) ) -> ()->() {
     
-    var lastFireTime:DispatchTime = DispatchTime(uptimeNanoseconds: 0)
+    var lastFireTime = DispatchTime(uptimeNanoseconds: 0)
     let dispatchDelay = Int64(delay * Double(NSEC_PER_SEC))
     
     return {
@@ -153,7 +153,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = document
         collectionSetDidChange()
 
-        _ = client.insert(self.name, document: [document.fields()]) { result, error in
+        client.insert(self.name, document: [document.fields()]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = nil
@@ -172,13 +172,13 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
     - parameter operation:      a dictionary containing a Mongo selector and a json object
     */
     
-    open func update(_ document: T, withMongoOperation operation: [String:AnyObject]) {
+    open func update(_ document: T, withMongoOperation operation: [String:Any]) {
         let originalDocument = documents[document._id]
         
         documents[document._id] = document
         collectionSetDidChange()
         
-        _ = client.update(self.name, document: [["_id":document._id], operation]) { result, error in
+        client.update(self.name, document: [["_id":document._id], operation]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = originalDocument
@@ -204,7 +204,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
 
         let fields = document.fields()
         
-        _ = client.update(self.name, document: [["_id":document._id],["$set":fields]]) { result, error in
+        client.update(self.name, document: [["_id":document._id],["$set":fields]]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = originalDocument
@@ -225,7 +225,7 @@ open class MeteorCollection<T:MeteorDocument>: AbstractCollection {
         documents[document._id] = nil
         collectionSetDidChange()
 
-        _ = client.remove(self.name, document: [["_id":document._id]]) { result, error in
+        client.remove(self.name, document: [["_id":document._id]]) { result, error in
             
             if error != nil {
                 self.documents[document._id] = document

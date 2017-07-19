@@ -32,7 +32,11 @@ import XCGLogger
 
 let log = XCGLogger(identifier: "DDP")
 
+<<<<<<< HEAD
+public typealias DDPMethodCallback = (_ result:AnyObject?, _ error:DDPError?) -> ()
+=======
 public typealias DDPMethodCallback = (_ result:Any?, _ error:DDPError?) -> ()
+>>>>>>> master
 public typealias DDPConnectedCallback = (_ session:String) -> ()
 public typealias DDPCallback = () -> ()
 
@@ -42,8 +46,13 @@ public typealias DDPCallback = () -> ()
  */
 
 public protocol SwiftDDPDelegate {
+<<<<<<< HEAD
+    func ddpUserDidLogin(_ user:String?)
+    func ddpUserDidLogout(_ user:String?)
+=======
     func ddpUserDidLogin(_ user:String)
     func ddpUserDidLogout(_ user:String)
+>>>>>>> master
 }
 
 /**
@@ -207,13 +216,13 @@ open class DDPClient: NSObject {
                     
                     // let loginServicesSubscriptionCollection = "meteor_accounts_loginServiceConfiguration"
                     let loginServiceConfiguration = "meteor.loginServiceConfiguration"
-                    self.sub(loginServiceConfiguration, params: nil)           // /tools/meteor-services/auth.js line 922
+                    _ = self.sub(loginServiceConfiguration, params: nil)           // /tools/meteor-services/auth.js line 922
                     
                     
                     // Resubscribe to existing subs on connection to ensure continuity
                     self.subscriptions.forEach({ (subscription: (String, (id: String, name: String, ready: Bool))) -> () in
                         if subscription.1.name != loginServiceConfiguration {
-                            self.sub(subscription.1.id, name: subscription.1.name, params: nil, callback: nil)
+                            _ = self.sub(subscription.1.id, name: subscription.1.name, params: nil, callback: nil)
                         }
                     })
                     callback?(session)
@@ -355,7 +364,11 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the method has been executed
      */
     
+<<<<<<< HEAD
+    open func method(_ name: String, params: NSArray?, callback: DDPMethodCallback?) -> String {
+=======
     @discardableResult open func method(_ name: String, params: Any?, callback: DDPMethodCallback?) -> String {
+>>>>>>> master
         let id = getId()
         let message = ["msg":"method", "method":name, "id":id] as NSMutableDictionary
         if let p = params { message["params"] = p }
@@ -375,7 +388,11 @@ open class DDPClient: NSObject {
     // Subscribe
     //
     
+<<<<<<< HEAD
+    internal func sub(_ id: String, name: String, params: NSArray?, callback: DDPCallback?) -> String {
+=======
     @discardableResult internal func sub(_ id: String, name: String, params: [Any]?, callback: DDPCallback?) -> String {
+>>>>>>> master
         
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
@@ -398,7 +415,11 @@ open class DDPClient: NSObject {
      - parameter params:     An object containing method arguments, if any
      */
     
+<<<<<<< HEAD
+    open func sub(_ name: String, params: NSArray?) -> String {
+=======
     @discardableResult open func sub(_ name: String, params: [Any]?) -> String {
+>>>>>>> master
         let id = getId()
         return sub(id, name: name, params: params, callback:nil)
     }
@@ -413,7 +434,11 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the server sends a 'ready' message
      */
     
+<<<<<<< HEAD
+    open func sub(_ name:String, params: NSArray?, callback: DDPCallback?) -> String {
+=======
     open func sub(_ name:String, params: [Any]?, callback: DDPCallback?) -> String {
+>>>>>>> master
         let id = getId()
         log.info("Subscribing to ID \(id)")
         return sub(id, name: name, params: params, callback: callback)
@@ -450,6 +475,12 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the server sends a 'ready' message
      */
     
+<<<<<<< HEAD
+    open func unsub(withName name: String) -> [String] {
+        return findSubscription(name).map({id in
+            background.addOperation() { self.sendMessage(["msg":"unsub", "id": id]) }
+            unsub(withId: id, callback: nil)
+=======
     open func unsub(withName name: String, callback: DDPCallback?) -> [String] {
         
         let unsubgroup = DispatchGroup()
@@ -459,6 +490,7 @@ open class DDPClient: NSObject {
             unsub(withId: id){
                 unsubgroup.leave()
             }
+>>>>>>> master
             return id
         })
         
@@ -506,7 +538,11 @@ open class DDPClient: NSObject {
     }
     
     fileprivate func nosub(_ id: String, error: DDPError?) {
+<<<<<<< HEAD
+        if let e = error , (e.isValid == true) {
+=======
         if let e = error, (e.isValid == true) {
+>>>>>>> master
             log.error("\(e)")
         } else {
             if let completion = unsubCallbacks[id],

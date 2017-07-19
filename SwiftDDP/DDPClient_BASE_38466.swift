@@ -32,8 +32,8 @@ import XCGLogger
 
 let log = XCGLogger(identifier: "DDP")
 
-public typealias DDPMethodCallback = (_ result:Any?, _ error:DDPError?) -> ()
-public typealias DDPConnectedCallback = (_ session:String) -> ()
+public typealias DDPMethodCallback = (result:AnyObject?, error:DDPError?) -> ()
+public typealias DDPConnectedCallback = (session:String) -> ()
 public typealias DDPCallback = () -> ()
 
 
@@ -42,85 +42,85 @@ public typealias DDPCallback = () -> ()
  */
 
 public protocol SwiftDDPDelegate {
-    func ddpUserDidLogin(_ user:String)
-    func ddpUserDidLogout(_ user:String)
+    func ddpUserDidLogin(user:String)
+    func ddpUserDidLogout(user:String)
 }
 
 /**
  DDPClient is the base class for communicating with a server using the DDP protocol
  */
 
-open class DDPClient: NSObject {
+public class DDPClient: NSObject {
     
     // included for storing login id and token
-    internal let userData = UserDefaults.standard
+    internal let userData = NSUserDefaults.standardUserDefaults()
     
-    let background: OperationQueue = {
-        let queue = OperationQueue()
+    let background: NSOperationQueue = {
+        let queue = NSOperationQueue()
         queue.name = "DDP Background Data Queue"
-        queue.qualityOfService = .background
+        queue.qualityOfService = .Background
         return queue
     }()
     
     // Callbacks execute in the order they're received
-    internal let callbackQueue: OperationQueue = {
-        let queue = OperationQueue()
+    internal let callbackQueue: NSOperationQueue = {
+        let queue = NSOperationQueue()
         queue.name = "DDP Callback Queue"
         queue.maxConcurrentOperationCount = 1
-        queue.qualityOfService = .userInitiated
+        queue.qualityOfService = .UserInitiated
         return queue
     }()
     
     // Document messages are processed in the order that they are received,
     // separately from callbacks
-    internal let documentQueue: OperationQueue = {
-        let queue = OperationQueue()
+    internal let documentQueue: NSOperationQueue = {
+        let queue = NSOperationQueue()
         queue.name = "DDP Background Queue"
         queue.maxConcurrentOperationCount = 1
-        queue.qualityOfService = .background
+        queue.qualityOfService = .Background
         return queue
     }()
     
     // Hearbeats get a special queue so that they're not blocked by
     // other operations, causing the connection to close
-    internal let heartbeat: OperationQueue = {
-        let queue = OperationQueue()
+    internal let heartbeat: NSOperationQueue = {
+        let queue = NSOperationQueue()
         queue.name = "DDP Heartbeat Queue"
-        queue.qualityOfService = .utility
+        queue.qualityOfService = .Utility
         return queue
     }()
     
-    let userBackground: OperationQueue = {
-        let queue = OperationQueue()
+    let userBackground: NSOperationQueue = {
+        let queue = NSOperationQueue()
         queue.name = "DDP High Priority Background Queue"
-        queue.qualityOfService = .userInitiated
+        queue.qualityOfService = .UserInitiated
         return queue
     }()
     
-    let userMainQueue: OperationQueue = {
-        let queue = OperationQueue.main
+    let userMainQueue: NSOperationQueue = {
+        let queue = NSOperationQueue.mainQueue()
         queue.name = "DDP High Priorty Main Queue"
-        queue.qualityOfService = .userInitiated
+        queue.qualityOfService = .UserInitiated
         return queue
     }()
     
-    fileprivate var socket:WebSocket!{
+    private var socket:WebSocket!{
         didSet{ socket.allowSelfSignedSSL = self.allowSelfSignedSSL }
     }
 
-    fileprivate var server:(ping:Date?, pong:Date?) = (nil, nil)
+    private var server:(ping:NSDate?, pong:NSDate?) = (nil, nil)
     
     internal var resultCallbacks:[String:Completion] = [:]
     internal var subCallbacks:[String:Completion] = [:]
     internal var unsubCallbacks:[String:Completion] = [:]
     
-    open var url:String!
-    fileprivate var subscriptions = [String:(id:String, name:String, ready:Bool)]()
+    public var url:String!
+    private var subscriptions = [String:(id:String, name:String, ready:Bool)]()
     
     internal var events = DDPEvents()
     internal var connection:(ddp:Bool, session:String?) = (false, nil)
     
-    open var delegate:SwiftDDPDelegate?
+    public var delegate:SwiftDDPDelegate?
     
 
     // MARK: Settings
@@ -129,7 +129,7 @@ open class DDPClient: NSObject {
     Boolean value that determines whether the
     */
     
-    open var allowSelfSignedSSL:Bool = false {
+    public var allowSelfSignedSSL:Bool = false {
         didSet{
             guard let currentSocket = socket else { return }
             currentSocket.allowSelfSignedSSL = allowSelfSignedSSL
@@ -141,9 +141,9 @@ open class DDPClient: NSObject {
     Possible values: .Verbose, .Debug, .Info, .Warning, .Error, .Severe, .None
     */
     
-    open var logLevel = XCGLogger.Level.none {
+    public var logLevel = XCGLogger.LogLevel.None {
         didSet {
-            log.setup(level: logLevel, showLogIdentifier: true, showFunctionName: true, showThreadName: true, showLevel: true, showFileNames: false, showLineNumbers: true, showDate: false, writeToFile: nil, fileLevel: .none)
+            log.setup(logLevel, showLogIdentifier: true, showFunctionName: true, showThreadName: true, showLogLevel: true, showFileNames: false, showLineNumbers: true, showDate: false, writeToFile: nil, fileLogLevel: .None)
         }
     }
     
@@ -155,13 +155,13 @@ open class DDPClient: NSObject {
     Creates a random String id
     */
     
-    open func getId() -> String {
+    public func getId() -> String {
         let numbers = Set<Character>(["0","1","2","3","4","5","6","7","8","9"])
-        let uuid = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+        let uuid = NSUUID().UUIDString.stringByReplacingOccurrencesOfString("-", withString: "")
         var id = ""
         for character in uuid.characters {
             if (!numbers.contains(character) && (round(Float(arc4random()) / Float(UINT32_MAX)) == 1)) {
-                id += String(character).lowercased()
+                id += String(character).lowercaseString
             } else {
                 id += String(character)
             }
@@ -176,10 +176,10 @@ open class DDPClient: NSObject {
      - parameter callback:   A closure that takes a String argument with the value of the websocket session token
      */
     
-    open func connect(_ url:String, callback:DDPConnectedCallback?) {
+    public func connect(url:String, callback:DDPConnectedCallback?) {
         self.url = url
         // capture the thread context in which the function is called
-        let executionQueue = OperationQueue.current
+        let executionQueue = NSOperationQueue.currentQueue()
         
         socket = WebSocket(url)
         //Create backoff
@@ -199,7 +199,7 @@ open class DDPClient: NSObject {
         socket.event.error = events.onWebsocketError
         
         socket.event.open = {
-            self.heartbeat.addOperation() {
+            self.heartbeat.addOperationWithBlock() {
                 
                 // Add a subscription to loginServices to each connection event
                 let callbackWithServiceConfiguration = { (session:String) in
@@ -216,10 +216,10 @@ open class DDPClient: NSObject {
                             self.sub(subscription.1.id, name: subscription.1.name, params: nil, callback: nil)
                         }
                     })
-                    callback?(session)
+                    callback?(session: session)
                 }
                 
-                var completion = Completion(connectedCallback: callbackWithServiceConfiguration)
+                var completion = Completion(callback: callbackWithServiceConfiguration)
                 //Reset the backoff to original values
                 backOff.reset()
                 completion.executionQueue = executionQueue
@@ -229,7 +229,7 @@ open class DDPClient: NSObject {
         }
         
         socket.event.message = { message in
-            self.background.addOperation() {
+            self.background.addOperationWithBlock() {
                 if let text = message as? String {
                     do { try self.ddpMessageHandler(DDPMessage(message: text)) }
                     catch { log.debug("Message handling error. Raw message: \(text)")}
@@ -238,24 +238,24 @@ open class DDPClient: NSObject {
         }
     }
     
-    fileprivate func ping() {
-        heartbeat.addOperation() {
+    private func ping() {
+        heartbeat.addOperationWithBlock() {
             self.sendMessage(["msg":"ping", "id":self.getId()])
         }
     }
     
     // Respond to a server ping
-    fileprivate func pong(_ ping: DDPMessage) {
-        heartbeat.addOperation() {
-            self.server.ping = Date()
+    private func pong(ping: DDPMessage) {
+        heartbeat.addOperationWithBlock() {
+            self.server.ping = NSDate()
             var response = ["msg":"pong"]
             if let id = ping.id { response["id"] = id }
-            self.sendMessage(response as NSDictionary)
+            self.sendMessage(response)
         }
     }
     
     // Parse DDP messages and dispatch to the appropriate function
-    internal func ddpMessageHandler(_ message: DDPMessage) throws {
+    internal func ddpMessageHandler(message: DDPMessage) throws {
         
         log.debug("Received message: \(message.json)")
         
@@ -265,7 +265,7 @@ open class DDPClient: NSObject {
             self.connection = (true, message.session!)
             self.events.onConnected.execute(message.session!)
             
-        case .Result: callbackQueue.addOperation() {
+        case .Result: callbackQueue.addOperationWithBlock() {
             if let id = message.id,                              // Message has id
                 let completion = self.resultCallbacks[id],          // There is a callback registered for the message
                 let result = message.result {
@@ -280,7 +280,7 @@ open class DDPClient: NSObject {
             
             // Principal callbacks for managing data
             // Document was added
-        case .Added: documentQueue.addOperation() {
+        case .Added: documentQueue.addOperationWithBlock() {
             if let collection = message.collection,
                 let id = message.id {
                     self.documentWasAdded(collection, id: id, fields: message.fields)
@@ -288,7 +288,7 @@ open class DDPClient: NSObject {
             }
             
             // Document was changed
-        case .Changed: documentQueue.addOperation() {
+        case .Changed: documentQueue.addOperationWithBlock() {
             if let collection = message.collection,
                 let id = message.id {
                     self.documentWasChanged(collection, id: id, fields: message.fields, cleared: message.cleared)
@@ -296,7 +296,7 @@ open class DDPClient: NSObject {
             }
             
             // Document was removed
-        case .Removed: documentQueue.addOperation() {
+        case .Removed: documentQueue.addOperationWithBlock() {
             if let collection = message.collection,
                 let id = message.id {
                     self.documentWasRemoved(collection, id: id)
@@ -304,14 +304,14 @@ open class DDPClient: NSObject {
             }
             
             // Notifies you when the result of a method changes
-        case .Updated: documentQueue.addOperation() {
+        case .Updated: documentQueue.addOperationWithBlock() {
             if let methods = message.methods {
                 self.methodWasUpdated(methods)
             }
             }
             
             // Callbacks for managing subscriptions
-        case .Ready: documentQueue.addOperation() {
+        case .Ready: documentQueue.addOperationWithBlock() {
             if let subs = message.subs {
                 self.ready(subs)
             }
@@ -319,17 +319,17 @@ open class DDPClient: NSObject {
             
             // Callback that fires when subscription has been completely removed
             //
-        case .Nosub: documentQueue.addOperation() {
+        case .Nosub: documentQueue.addOperationWithBlock() {
             if let id = message.id {
                 self.nosub(id, error: message.error)
             }
             }
             
-        case .Ping: heartbeat.addOperation() { self.pong(message) }
+        case .Ping: heartbeat.addOperationWithBlock() { self.pong(message) }
             
-        case .Pong: heartbeat.addOperation() { self.server.pong = Date() }
+        case .Pong: heartbeat.addOperationWithBlock() { self.server.pong = NSDate() }
             
-        case .Error: background.addOperation() {
+        case .Error: background.addOperationWithBlock() {
             self.didReceiveErrorMessage(DDPError(json: message.json))
             }
             
@@ -338,7 +338,7 @@ open class DDPClient: NSObject {
         }
     }
     
-    fileprivate func sendMessage(_ message:NSDictionary) {
+    private func sendMessage(message:NSDictionary) {
         if let m = message.stringValue() {
             self.socket.send(m)
         }
@@ -355,17 +355,17 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the method has been executed
      */
     
-    @discardableResult open func method(_ name: String, params: Any?, callback: DDPMethodCallback?) -> String {
+    public func method(name: String, params: AnyObject?, callback: DDPMethodCallback?) -> String {
         let id = getId()
         let message = ["msg":"method", "method":name, "id":id] as NSMutableDictionary
         if let p = params { message["params"] = p }
         
         if let completionCallback = callback {
-            let completion = Completion(methodCallback: completionCallback)
+            let completion = Completion(callback: completionCallback)
             self.resultCallbacks[id] = completion
         }
         
-        userBackground.addOperation() {
+        userBackground.addOperationWithBlock() {
             self.sendMessage(message)
         }
         return id
@@ -375,7 +375,7 @@ open class DDPClient: NSObject {
     // Subscribe
     //
     
-    @discardableResult internal func sub(_ id: String, name: String, params: [Any]?, callback: DDPCallback?) -> String {
+    internal func sub(id: String, name: String, params: [AnyObject]?, callback: DDPCallback?) -> String {
         
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
@@ -385,7 +385,7 @@ open class DDPClient: NSObject {
         self.subscriptions[id] = (id, name, false)
         let message = ["msg":"sub", "name":name, "id":id] as NSMutableDictionary
         if let p = params { message["params"] = p }
-        userBackground.addOperation() {
+        userBackground.addOperationWithBlock() {
             self.sendMessage(message)
         }
         return id
@@ -398,7 +398,7 @@ open class DDPClient: NSObject {
      - parameter params:     An object containing method arguments, if any
      */
     
-    @discardableResult open func sub(_ name: String, params: [Any]?) -> String {
+    public func sub(name: String, params: [AnyObject]?) -> String {
         let id = getId()
         return sub(id, name: name, params: params, callback:nil)
     }
@@ -413,14 +413,14 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the server sends a 'ready' message
      */
     
-    open func sub(_ name:String, params: [Any]?, callback: DDPCallback?) -> String {
+    public func sub(name:String, params: [AnyObject]?, callback: DDPCallback?) -> String {
         let id = getId()
-        log.info("Subscribing to ID \(id)")
+        print("Subscribing to ID \(id)")
         return sub(id, name: name, params: params, callback: callback)
     }
     
     // Iterates over the Dictionary of subscriptions to find a subscription by name
-    internal func findSubscription(_ name:String) -> [String] {
+    internal func findSubscription(name:String) -> [String] {
         var subs:[String] = []
         for sub in  subscriptions.values {
             if sub.name == name {
@@ -428,16 +428,6 @@ open class DDPClient: NSObject {
             }
         }
         return subs
-    }
-    
-    // Iterates over the Dictionary of subscriptions to find a subscription by name
-    internal func subscriptionReady(_ name:String) -> Bool {
-        for sub in  subscriptions.values {
-            if sub.name == name {
-                return sub.ready
-            }
-        }
-        return false
     }
     
     //
@@ -450,23 +440,12 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the server sends a 'ready' message
      */
     
-    open func unsub(withName name: String, callback: DDPCallback?) -> [String] {
-        
-        let unsubgroup = DispatchGroup()
-        
-        let unsub_ids = findSubscription(name).map({id -> (String) in
-            unsubgroup.enter()
-            unsub(withId: id){
-                unsubgroup.leave()
-            }
+    public func unsub(withName name: String) -> [String] {
+        return findSubscription(name).map({id in
+            background.addOperationWithBlock() { self.sendMessage(["msg":"unsub", "id": id]) }
+            unsub(withId: id, callback: nil)
             return id
         })
-        
-        if let completionCallback = callback {
-            unsubgroup.notify(queue: DispatchQueue.main, execute: completionCallback)
-        }
-        
-        return unsub_ids
     }
     
     /**
@@ -478,19 +457,19 @@ open class DDPClient: NSObject {
      - parameter callback:   The closure to be executed when the server sends a 'ready' message
      */
     
-    open func unsub(withId id: String, callback: DDPCallback?) {
+    public func unsub(withId id: String, callback: DDPCallback?) {
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
             unsubCallbacks[id] = completion
         }
-        background.addOperation() { self.sendMessage(["msg":"unsub", "id":id]) }
+        background.addOperationWithBlock() { self.sendMessage(["msg":"unsub", "id":id]) }
     }
     
     //
     // Responding to server subscription messages
     //
     
-    fileprivate func ready(_ subs: [String]) {
+    private func ready(subs: [String]) {
         for id in subs {
             if let completion = subCallbacks[id] {
                 completion.execute()                // Run the callback
@@ -505,8 +484,8 @@ open class DDPClient: NSObject {
         }
     }
     
-    fileprivate func nosub(_ id: String, error: DDPError?) {
-        if let e = error, (e.isValid == true) {
+    private func nosub(id: String, error: DDPError?) {
+        if let e = error where (e.isValid == true) {
             log.error("\(e)")
         } else {
             if let completion = unsubCallbacks[id],
@@ -534,7 +513,7 @@ open class DDPClient: NSObject {
     - parameter subscriptionName:           The name of the subscription
     */
     
-    open func subscriptionIsReady(_ subscriptionId: String, subscriptionName:String) {}
+    public func subscriptionIsReady(subscriptionId: String, subscriptionName:String) {}
     
     /**
      Executes when a subscription is removed.
@@ -543,7 +522,7 @@ open class DDPClient: NSObject {
      - parameter subscriptionName:           The name of the subscription
      */
     
-    open func subscriptionWasRemoved(_ subscriptionId:String, subscriptionName:String) {}
+    public func subscriptionWasRemoved(subscriptionId:String, subscriptionName:String) {}
     
     
     /**
@@ -554,8 +533,8 @@ open class DDPClient: NSObject {
      - parameter fields:                     The documents properties
      */
     
-    open func documentWasAdded(_ collection:String, id:String, fields:NSDictionary?) {
-        if let added = events.onAdded { added(collection, id, fields) }
+    public func documentWasAdded(collection:String, id:String, fields:NSDictionary?) {
+        if let added = events.onAdded { added(collection: collection, id: id, fields: fields) }
     }
     
     /**
@@ -565,8 +544,8 @@ open class DDPClient: NSObject {
      - parameter id:                         The document's unique id
      */
     
-    open func documentWasRemoved(_ collection:String, id:String) {
-        if let removed = events.onRemoved { removed(collection, id) }
+    public func documentWasRemoved(collection:String, id:String) {
+        if let removed = events.onRemoved { removed(collection: collection, id: id) }
     }
     
     /**
@@ -578,8 +557,8 @@ open class DDPClient: NSObject {
      - parameter cleared:                    Optional array of strings (field names to delete)
      */
     
-    open func documentWasChanged(_ collection:String, id:String, fields:NSDictionary?, cleared:[String]?) {
-        if let changed = events.onChanged { changed(collection, id, fields, cleared as NSArray?) }
+    public func documentWasChanged(collection:String, id:String, fields:NSDictionary?, cleared:[String]?) {
+        if let changed = events.onChanged { changed(collection:collection, id:id, fields:fields, cleared:cleared) }
     }
     
     /**
@@ -588,8 +567,8 @@ open class DDPClient: NSObject {
      - parameter methods:                    An array of strings (ids passed to 'method', all of whose writes have been reflected in data messages)
      */
     
-    open func methodWasUpdated(_ methods:[String]) {
-        if let updated = events.onUpdated { updated(methods) }
+    public func methodWasUpdated(methods:[String]) {
+        if let updated = events.onUpdated { updated(methods: methods) }
     }
     
     /**
@@ -598,7 +577,7 @@ open class DDPClient: NSObject {
      - parameter message:                    A DDPError object with information about the error
      */
     
-    open func didReceiveErrorMessage(_ message: DDPError) {
-        if let error = events.onError { error(message) }
+    public func didReceiveErrorMessage(message: DDPError) {
+        if let error = events.onError { error(message: message) }
     }
 }
