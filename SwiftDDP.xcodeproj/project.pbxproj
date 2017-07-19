@@ -79,6 +79,9 @@
 
 /* Begin PBXFileReference section */
 		6FFFCBC61C64352300C147F2 /* DDPExponentialBackoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPExponentialBackoff.swift; sourceTree = "<group>"; };
+		8CC2EF9B1F1FB63500C1C90C /* MeteorOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteorOAuth.swift; sourceTree = "<group>"; };
+		8CC2EF9C1F1FB63500C1C90C /* MeteorOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteorOAuthViewController.swift; sourceTree = "<group>"; };
+		8CC2EF9D1F1FB63500C1C90C /* MeteorOAuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteorOAuthServices.swift; sourceTree = "<group>"; };
 		AA0D2AC31D6BEEC700085B33 /* SwiftDDP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDDP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0D2AC51D6BEEC700085B33 /* SwiftDDP-tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDDP-tvOS.h"; sourceTree = "<group>"; };
 		AA0D2AC71D6BEEC700085B33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -230,6 +233,9 @@
 				D0339DD11C00DA6100A17DEB /* AbstractCollection.swift */,
 				D0339DD31C00DAB000A17DEB /* MeteorCollection.swift */,
 				D04D0DB81C21D489000244D6 /* MeteorDocument.swift */,
+				8CC2EF9B1F1FB63500C1C90C /* MeteorOAuth.swift */,
+				8CC2EF9D1F1FB63500C1C90C /* MeteorOAuthServices.swift */,
+				8CC2EF9C1F1FB63500C1C90C /* MeteorOAuthViewController.swift */,
 				D0F6C99C1BFFA04600A6CB70 /* EJSON.swift */,
 				D02A71E11BBEFBCA00940C17 /* Info.plist */,
 			);
