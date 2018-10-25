@@ -7,9 +7,9 @@ target 'SwiftDDP' do
 
   # Pods for SwiftDDP
 
-  pod 'CryptoSwift'#, :git => 'https://github.com/krzyzanowskim/CryptoSwift.git', :branch => 'swift3'
-  pod 'SwiftWebSocket'#, :git => 'https://github.com/tidwall/SwiftWebSocket.git'
-  pod 'XCGLogger'#, :git => 'https://github.com/DaveWoodCom/XCGLogger.git', :branch => 'swift_3.0'
+  pod 'CryptoSwift'
+  pod 'SwiftWebSocket'
+  pod 'XCGLogger'
   
   pod 'Quick'
   pod 'Nimble'
