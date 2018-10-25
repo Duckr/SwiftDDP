@@ -52,7 +52,7 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
         }
         
         
-        cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MeteorOAuthDialogViewController.close))
+        cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(MeteorOAuthDialogViewController.close))
         navigationItem.rightBarButtonItem = cancelButton
         navigationBar!.items = [navigationItem]
                 
@@ -72,7 +72,7 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
         webView.frame = CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height - 64)
     }
     
-    func close() {
+    @objc func close() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -80,7 +80,7 @@ public class MeteorOAuthDialogViewController: UIViewController, WKNavigationDele
     func signIn(token: String, secret: String) {
         let params = ["oauth":["credentialToken": token, "credentialSecret": secret]]
         Meteor.client.login(params as NSDictionary) { result, error in
-            print("Meteor login attempt \(result), \(error)")
+            print("Meteor login attempt \(String(describing: result)), \(String(describing: error))")
             self.close()
         }
     }

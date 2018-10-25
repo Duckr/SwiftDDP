@@ -492,7 +492,7 @@ extension DDPClient {
                         if let completion = callback { completion() }
                     } else {
                         self.logout()
-                        log.error("\(error)")
+                        log.error("\(String(describing: error))")
                         callback?()
                     }
                     }{

@@ -7,7 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		149D6C40EAFF4EA0905BA518 /* Pods_SwiftDDP_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7565C9091B3B799DCA7BB38 /* Pods_SwiftDDP_Tests.framework */; };
+		4569FA867D2EFC73F91868B9 /* Pods_SwiftDDP_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B95A0A9850E85DDE674F054 /* Pods_SwiftDDP_OSX.framework */; };
 		6FFFCBC71C64352300C147F2 /* DDPExponentialBackoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFCBC61C64352300C147F2 /* DDPExponentialBackoff.swift */; };
+		8C715F162181DB8700E36872 /* MeteorOAuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2EF9D1F1FB63500C1C90C /* MeteorOAuthServices.swift */; };
+		8C715F182181DB9200E36872 /* MeteorOAuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2EF9D1F1FB63500C1C90C /* MeteorOAuthServices.swift */; };
+		8C715F192181DB9900E36872 /* MeteorOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2EF9B1F1FB63500C1C90C /* MeteorOAuth.swift */; };
+		8C715F1A2181DB9A00E36872 /* MeteorOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2EF9B1F1FB63500C1C90C /* MeteorOAuth.swift */; };
+		8C715F1B2181DBA900E36872 /* MeteorOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2EF9C1F1FB63500C1C90C /* MeteorOAuthViewController.swift */; };
+		8C715F1C2181DBA900E36872 /* MeteorOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2EF9C1F1FB63500C1C90C /* MeteorOAuthViewController.swift */; };
+		8C715F1E2181DBB100E36872 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D02A71E11BBEFBCA00940C17 /* Info.plist */; };
+		8C7BA4CF2181DEF1001EE503 /* SwiftDDP-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7BA4CD2181DEF1001EE503 /* SwiftDDP-OSX.h */; };
+		8C7BA4D02181DEF1001EE503 /* SwiftDDP-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7BA4CD2181DEF1001EE503 /* SwiftDDP-OSX.h */; };
+		8C7BA4D22181DEF1001EE503 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7BA4CE2181DEF1001EE503 /* Info.plist */; };
+		8C7BA4D62181DF0A001EE503 /* SwiftDDP-tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7BA4D42181DF0A001EE503 /* SwiftDDP-tvOS.h */; };
+		8C7BA4D92181DF0A001EE503 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7BA4D52181DF0A001EE503 /* Info.plist */; };
 		AA0D2AC61D6BEEC700085B33 /* SwiftDDP-tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0D2AC51D6BEEC700085B33 /* SwiftDDP-tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA0D2ACB1D6BF0F500085B33 /* DDPExponentialBackoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFCBC61C64352300C147F2 /* DDPExponentialBackoff.swift */; };
 		AA0D2ACC1D6BF0F500085B33 /* DDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A720B1BBEFCD200940C17 /* DDPClient.swift */; };
@@ -25,17 +39,14 @@
 		AA0D2AE01D6BF18700085B33 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D2ADB1D6BF18700085B33 /* XCGLogger.framework */; };
 		AA0D2AE11D6BF18700085B33 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D2ADC1D6BF18700085B33 /* SwiftWebSocket.framework */; };
 		AA0D2AE41D6BF18700085B33 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D2ADF1D6BF18700085B33 /* CryptoSwift.framework */; };
-		AAFDED3F1D6BF984000583AA /* SwiftDDP-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFDED3E1D6BF984000583AA /* SwiftDDP-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1D6806F181E732E49EB235A /* Pods_SwiftDDP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1329699AC66F51BCC54C0E /* Pods_SwiftDDP.framework */; };
 		D02A72101BBEFCD300940C17 /* DDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A720B1BBEFCD200940C17 /* DDPClient.swift */; };
 		D02A72111BBEFCD300940C17 /* DDPMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A720C1BBEFCD300940C17 /* DDPMessage.swift */; };
 		D02A72121BBEFCD300940C17 /* DDPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A720D1BBEFCD300940C17 /* DDPExtensions.swift */; };
 		D02A72131BBEFCD300940C17 /* DDPEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A720E1BBEFCD300940C17 /* DDPEvents.swift */; };
-		D02A72281BBF01E900940C17 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02A72271BBF01E900940C17 /* CryptoSwift.framework */; };
+		D02A72281BBF01E900940C17 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02A72271BBF01E900940C17 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		D02A722A1BBF01ED00940C17 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02A72291BBF01ED00940C17 /* SwiftWebSocket.framework */; };
 		D02A722C1BBF01EF00940C17 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02A722B1BBF01EF00940C17 /* XCGLogger.framework */; };
-		D02A722F1BBF02AA00940C17 /* CryptoSwift.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D02A722E1BBF02AA00940C17 /* CryptoSwift.framework.dSYM */; };
-		D02A72311BBF02B400940C17 /* SwiftWebSocket.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D02A72301BBF02B400940C17 /* SwiftWebSocket.framework.dSYM */; };
-		D02A72331BBF02B900940C17 /* XCGLogger.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D02A72321BBF02B900940C17 /* XCGLogger.framework.dSYM */; };
 		D02A72561BBF07AF00940C17 /* SwiftDDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02A72551BBF07AF00940C17 /* SwiftDDP.swift */; };
 		D02A72581BBF07AF00940C17 /* SwiftDDP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02A71DC1BBEFBCA00940C17 /* SwiftDDP.framework */; };
 		D02A725E1BBF07F700940C17 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02A72351BBF033600940C17 /* Nimble.framework */; };
@@ -50,6 +61,7 @@
 		D0C71B5B1BC174280089B6CE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C71B5A1BC174280089B6CE /* Data.swift */; };
 		D0D724661C4E7FBA00EE91DC /* DDPUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D724611C4E7FBA00EE91DC /* DDPUtilities.swift */; };
 		D0F6C99D1BFFA04600A6CB70 /* EJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F6C99C1BFFA04600A6CB70 /* EJSON.swift */; };
+		ECEC96FD7BF365E871DF40AC /* Pods_SwiftDDP_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8074007BD4542A24F855FA7A /* Pods_SwiftDDP_tvOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,19 +81,29 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				D02A722F1BBF02AA00940C17 /* CryptoSwift.framework.dSYM in CopyFiles */,
-				D02A72311BBF02B400940C17 /* SwiftWebSocket.framework.dSYM in CopyFiles */,
-				D02A72331BBF02B900940C17 /* XCGLogger.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		25E05D69EEA663D41A81BDDE /* Pods-SwiftDDP Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP Tests/Pods-SwiftDDP Tests.release.xcconfig"; sourceTree = "<group>"; };
+		5F7AEB387C3FF0E6668DCF26 /* Pods-SwiftDDP Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP Tests/Pods-SwiftDDP Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		6E1329699AC66F51BCC54C0E /* Pods_SwiftDDP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftDDP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FFFCBC61C64352300C147F2 /* DDPExponentialBackoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPExponentialBackoff.swift; sourceTree = "<group>"; };
+		784AF53F14009146B85712D4 /* Pods-SwiftDDP-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP-tvOS/Pods-SwiftDDP-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		7BFDC35C53284E7C73C30DFF /* Pods-SwiftDDP-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP-OSX/Pods-SwiftDDP-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		8074007BD4542A24F855FA7A /* Pods_SwiftDDP_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftDDP_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B95A0A9850E85DDE674F054 /* Pods_SwiftDDP_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftDDP_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C7BA4CD2181DEF1001EE503 /* SwiftDDP-OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftDDP-OSX.h"; sourceTree = "<group>"; };
+		8C7BA4CE2181DEF1001EE503 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C7BA4D42181DF0A001EE503 /* SwiftDDP-tvOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftDDP-tvOS.h"; sourceTree = "<group>"; };
+		8C7BA4D52181DF0A001EE503 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CC2EF9B1F1FB63500C1C90C /* MeteorOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteorOAuth.swift; sourceTree = "<group>"; };
 		8CC2EF9C1F1FB63500C1C90C /* MeteorOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteorOAuthViewController.swift; sourceTree = "<group>"; };
 		8CC2EF9D1F1FB63500C1C90C /* MeteorOAuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteorOAuthServices.swift; sourceTree = "<group>"; };
+		925852DA4ADFBAE668C1E12E /* Pods-SwiftDDP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP/Pods-SwiftDDP.release.xcconfig"; sourceTree = "<group>"; };
+		A9CA24B7BB9B6BF021983B4B /* Pods-SwiftDDP-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP-OSX/Pods-SwiftDDP-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		AA0D2AC31D6BEEC700085B33 /* SwiftDDP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDDP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0D2AC51D6BEEC700085B33 /* SwiftDDP-tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDDP-tvOS.h"; sourceTree = "<group>"; };
 		AA0D2AC71D6BEEC700085B33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +115,8 @@
 		AAFDED3C1D6BF984000583AA /* SwiftDDP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDDP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAFDED3E1D6BF984000583AA /* SwiftDDP-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDDP-OSX.h"; sourceTree = "<group>"; };
 		AAFDED401D6BF984000583AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C04460E2BA2B8F0F24C834B6 /* Pods-SwiftDDP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP/Pods-SwiftDDP.debug.xcconfig"; sourceTree = "<group>"; };
+		C7565C9091B3B799DCA7BB38 /* Pods_SwiftDDP_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftDDP_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02A71DC1BBEFBCA00940C17 /* SwiftDDP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDDP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02A71E11BBEFBCA00940C17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D02A720B1BBEFCD200940C17 /* DDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPClient.swift; sourceTree = "<group>"; };
@@ -102,9 +126,6 @@
 		D02A72271BBF01E900940C17 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		D02A72291BBF01ED00940C17 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
 		D02A722B1BBF01EF00940C17 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
-		D02A722E1BBF02AA00940C17 /* CryptoSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CryptoSwift.framework.dSYM; path = Carthage/Build/iOS/CryptoSwift.framework.dSYM; sourceTree = "<group>"; };
-		D02A72301BBF02B400940C17 /* SwiftWebSocket.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftWebSocket.framework.dSYM; path = Carthage/Build/iOS/SwiftWebSocket.framework.dSYM; sourceTree = "<group>"; };
-		D02A72321BBF02B900940C17 /* XCGLogger.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = XCGLogger.framework.dSYM; path = Carthage/Build/iOS/XCGLogger.framework.dSYM; sourceTree = "<group>"; };
 		D02A72351BBF033600940C17 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		D02A72361BBF033600940C17 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		D02A72531BBF07AF00940C17 /* SwiftDDP Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftDDP Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,11 +144,8 @@
 		D0C71B571BC173030089B6CE /* SwiftMeteor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMeteor.swift; sourceTree = "<group>"; };
 		D0C71B5A1BC174280089B6CE /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D0D724611C4E7FBA00EE91DC /* DDPUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPUtilities.swift; sourceTree = "<group>"; };
-		D0E9DFDD1C359535005D92FA /* SwiftDDP OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDDP OSX.h"; sourceTree = "<group>"; };
-		D0E9DFDF1C359535005D92FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0E9DFE91C359535005D92FA /* SwiftDDP_OSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDDP_OSXTests.swift; sourceTree = "<group>"; };
-		D0E9DFEB1C359535005D92FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0F6C99C1BFFA04600A6CB70 /* EJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EJSON.swift; sourceTree = "<group>"; };
+		EC4780E9B7DE09A9202CA5AA /* Pods-SwiftDDP-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDDP-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDDP-tvOS/Pods-SwiftDDP-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +156,7 @@
 				AA0D2AE01D6BF18700085B33 /* XCGLogger.framework in Frameworks */,
 				AA0D2AE11D6BF18700085B33 /* SwiftWebSocket.framework in Frameworks */,
 				AA0D2AE41D6BF18700085B33 /* CryptoSwift.framework in Frameworks */,
+				ECEC96FD7BF365E871DF40AC /* Pods_SwiftDDP_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4569FA867D2EFC73F91868B9 /* Pods_SwiftDDP_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +175,7 @@
 				D02A72281BBF01E900940C17 /* CryptoSwift.framework in Frameworks */,
 				D02A722A1BBF01ED00940C17 /* SwiftWebSocket.framework in Frameworks */,
 				D02A722C1BBF01EF00940C17 /* XCGLogger.framework in Frameworks */,
+				B1D6806F181E732E49EB235A /* Pods_SwiftDDP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,12 +186,46 @@
 				D02A72581BBF07AF00940C17 /* SwiftDDP.framework in Frameworks */,
 				D02A725E1BBF07F700940C17 /* Nimble.framework in Frameworks */,
 				D02A725F1BBF07F700940C17 /* Quick.framework in Frameworks */,
+				149D6C40EAFF4EA0905BA518 /* Pods_SwiftDDP_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A90480A5F4C44BC45C078D2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C04460E2BA2B8F0F24C834B6 /* Pods-SwiftDDP.debug.xcconfig */,
+				925852DA4ADFBAE668C1E12E /* Pods-SwiftDDP.release.xcconfig */,
+				5F7AEB387C3FF0E6668DCF26 /* Pods-SwiftDDP Tests.debug.xcconfig */,
+				25E05D69EEA663D41A81BDDE /* Pods-SwiftDDP Tests.release.xcconfig */,
+				A9CA24B7BB9B6BF021983B4B /* Pods-SwiftDDP-OSX.debug.xcconfig */,
+				7BFDC35C53284E7C73C30DFF /* Pods-SwiftDDP-OSX.release.xcconfig */,
+				784AF53F14009146B85712D4 /* Pods-SwiftDDP-tvOS.debug.xcconfig */,
+				EC4780E9B7DE09A9202CA5AA /* Pods-SwiftDDP-tvOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8C7BA4CC2181DEF1001EE503 /* SwiftDDP-OSX */ = {
+			isa = PBXGroup;
+			children = (
+				8C7BA4CD2181DEF1001EE503 /* SwiftDDP-OSX.h */,
+				8C7BA4CE2181DEF1001EE503 /* Info.plist */,
+			);
+			path = "SwiftDDP-OSX";
+			sourceTree = SOURCE_ROOT;
+		};
+		8C7BA4D32181DF0A001EE503 /* SwiftDDP-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				8C7BA4D42181DF0A001EE503 /* SwiftDDP-tvOS.h */,
+				8C7BA4D52181DF0A001EE503 /* Info.plist */,
+			);
+			path = "SwiftDDP-tvOS";
+			sourceTree = "<group>";
+		};
 		AA0D2AC41D6BEEC700085B33 /* SwiftDDP-tvOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,8 +249,8 @@
 			children = (
 				D02A71DE1BBEFBCA00940C17 /* SwiftDDP */,
 				D02A72541BBF07AF00940C17 /* Tests */,
-				D0E9DFDC1C359535005D92FA /* SwiftDDP OSX */,
-				D0E9DFE81C359535005D92FA /* SwiftDDP OSXTests */,
+				8C7BA4D32181DF0A001EE503 /* SwiftDDP-tvOS */,
+				8C7BA4CC2181DEF1001EE503 /* SwiftDDP-OSX */,
 				AA0D2AC41D6BEEC700085B33 /* SwiftDDP-tvOS */,
 				AAFDED3D1D6BF984000583AA /* SwiftDDP-OSX */,
 				D02A72341BBF02C200940C17 /* Frameworks */,
@@ -204,6 +259,7 @@
 				D02A72B11BBF383700940C17 /* Cartfile */,
 				D02A72611BBF0AE300940C17 /* README.md */,
 				D02A71DD1BBEFBCA00940C17 /* Products */,
+				5A90480A5F4C44BC45C078D2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,14 +306,15 @@
 				AA0D2ADD1D6BF18700085B33 /* Quick.framework */,
 				AA0D2ADE1D6BF18700085B33 /* Nimble.framework */,
 				AA0D2ADF1D6BF18700085B33 /* CryptoSwift.framework */,
-				D02A72321BBF02B900940C17 /* XCGLogger.framework.dSYM */,
-				D02A72301BBF02B400940C17 /* SwiftWebSocket.framework.dSYM */,
-				D02A722E1BBF02AA00940C17 /* CryptoSwift.framework.dSYM */,
 				D02A72351BBF033600940C17 /* Nimble.framework */,
 				D02A72361BBF033600940C17 /* Quick.framework */,
 				D02A722B1BBF01EF00940C17 /* XCGLogger.framework */,
 				D02A72291BBF01ED00940C17 /* SwiftWebSocket.framework */,
 				D02A72271BBF01E900940C17 /* CryptoSwift.framework */,
+				6E1329699AC66F51BCC54C0E /* Pods_SwiftDDP.framework */,
+				C7565C9091B3B799DCA7BB38 /* Pods_SwiftDDP_Tests.framework */,
+				8B95A0A9850E85DDE674F054 /* Pods_SwiftDDP_OSX.framework */,
+				8074007BD4542A24F855FA7A /* Pods_SwiftDDP_tvOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -272,24 +329,6 @@
 			);
 			name = Tests;
 			path = SwiftDDPTests;
-			sourceTree = "<group>";
-		};
-		D0E9DFDC1C359535005D92FA /* SwiftDDP OSX */ = {
-			isa = PBXGroup;
-			children = (
-				D0E9DFDD1C359535005D92FA /* SwiftDDP OSX.h */,
-				D0E9DFDF1C359535005D92FA /* Info.plist */,
-			);
-			path = "SwiftDDP OSX";
-			sourceTree = "<group>";
-		};
-		D0E9DFE81C359535005D92FA /* SwiftDDP OSXTests */ = {
-			isa = PBXGroup;
-			children = (
-				D0E9DFE91C359535005D92FA /* SwiftDDP_OSXTests.swift */,
-				D0E9DFEB1C359535005D92FA /* Info.plist */,
-			);
-			path = "SwiftDDP OSXTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,7 +346,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAFDED3F1D6BF984000583AA /* SwiftDDP-OSX.h in Headers */,
+				8C7BA4D02181DEF1001EE503 /* SwiftDDP-OSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +354,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C7BA4CF2181DEF1001EE503 /* SwiftDDP-OSX.h in Headers */,
+				8C7BA4D62181DF0A001EE503 /* SwiftDDP-tvOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +366,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA0D2ACA1D6BEEC700085B33 /* Build configuration list for PBXNativeTarget "SwiftDDP-tvOS" */;
 			buildPhases = (
+				7039ED444654907FA728FC4B /* [CP] Check Pods Manifest.lock */,
 				AA0D2ABE1D6BEEC700085B33 /* Sources */,
 				AA0D2ABF1D6BEEC700085B33 /* Frameworks */,
 				AA0D2AC01D6BEEC700085B33 /* Headers */,
@@ -343,6 +385,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAFDED431D6BF984000583AA /* Build configuration list for PBXNativeTarget "SwiftDDP-OSX" */;
 			buildPhases = (
+				6F44EA17A74B79149E2156B2 /* [CP] Check Pods Manifest.lock */,
 				AAFDED371D6BF984000583AA /* Sources */,
 				AAFDED381D6BF984000583AA /* Frameworks */,
 				AAFDED391D6BF984000583AA /* Headers */,
@@ -361,6 +404,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D02A71F01BBEFBCA00940C17 /* Build configuration list for PBXNativeTarget "SwiftDDP" */;
 			buildPhases = (
+				A8448BCBAC665338C8B3D486 /* [CP] Check Pods Manifest.lock */,
 				D02A71D71BBEFBCA00940C17 /* Sources */,
 				D02A71D81BBEFBCA00940C17 /* Frameworks */,
 				D02A71D91BBEFBCA00940C17 /* Headers */,
@@ -381,10 +425,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D02A725B1BBF07AF00940C17 /* Build configuration list for PBXNativeTarget "SwiftDDP Tests" */;
 			buildPhases = (
+				EFA6BB88BF5E69C1F429D8B2 /* [CP] Check Pods Manifest.lock */,
 				D02A724F1BBF07AF00940C17 /* Sources */,
 				D02A72501BBF07AF00940C17 /* Frameworks */,
 				D02A72511BBF07AF00940C17 /* Resources */,
 				D02A72601BBF086A00940C17 /* ShellScript */,
+				8F88EE60ABB3E487FA512828 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -403,7 +449,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Peter Siegesmund";
 				TargetAttributes = {
 					AA0D2AC21D6BEEC700085B33 = {
@@ -414,10 +460,12 @@
 					};
 					D02A71DB1BBEFBCA00940C17 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0810;
+						DevelopmentTeam = 4BQX6CVKZH;
+						LastSwiftMigration = 1000;
 					};
 					D02A72521BBF07AF00940C17 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 4BQX6CVKZH;
 						LastSwiftMigration = 0810;
 					};
 				};
@@ -447,6 +495,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C7BA4D92181DF0A001EE503 /* Info.plist in Resources */,
+				8C715F1E2181DBB100E36872 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +504,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C7BA4D22181DEF1001EE503 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +525,104 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6F44EA17A74B79149E2156B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftDDP-OSX-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7039ED444654907FA728FC4B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftDDP-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F88EE60ABB3E487FA512828 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDDP Tests/Pods-SwiftDDP Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftWebSocket/SwiftWebSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftWebSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDDP Tests/Pods-SwiftDDP Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A8448BCBAC665338C8B3D486 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftDDP-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D02A72261BBF012400940C17 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -487,8 +636,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "
+";
 		};
 		D02A72601BBF086A00940C17 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -502,8 +651,30 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellScript = "
+";
+		};
+		EFA6BB88BF5E69C1F429D8B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftDDP Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -517,11 +688,14 @@
 				AA0D2ACD1D6BF0F500085B33 /* DDPEvents.swift in Sources */,
 				AA0D2ACE1D6BF0F500085B33 /* DDPCompletion.swift in Sources */,
 				AA0D2ACF1D6BF0F500085B33 /* DDPMessage.swift in Sources */,
+				8C715F182181DB9200E36872 /* MeteorOAuthServices.swift in Sources */,
+				8C715F1C2181DBA900E36872 /* MeteorOAuthViewController.swift in Sources */,
 				AA0D2AD01D6BF0F500085B33 /* DDPExtensions.swift in Sources */,
 				AA0D2AD11D6BF0F500085B33 /* DDPMethodResult.swift in Sources */,
 				AA0D2AD21D6BF0F500085B33 /* DDPUtilities.swift in Sources */,
 				AA0D2AD31D6BF0F500085B33 /* Meteor.swift in Sources */,
 				AA0D2AD41D6BF0F500085B33 /* AbstractCollection.swift in Sources */,
+				8C715F1A2181DB9A00E36872 /* MeteorOAuth.swift in Sources */,
 				AA0D2AD51D6BF0F500085B33 /* MeteorCollection.swift in Sources */,
 				AA0D2AD61D6BF0F500085B33 /* MeteorDocument.swift in Sources */,
 				AA0D2ADA1D6BF0F500085B33 /* EJSON.swift in Sources */,
@@ -544,11 +718,14 @@
 				D0F6C99D1BFFA04600A6CB70 /* EJSON.swift in Sources */,
 				D0339DD41C00DAB000A17DEB /* MeteorCollection.swift in Sources */,
 				D02B30831BDA8E2200E1DB72 /* DDPMethodResult.swift in Sources */,
+				8C715F162181DB8700E36872 /* MeteorOAuthServices.swift in Sources */,
+				8C715F1B2181DBA900E36872 /* MeteorOAuthViewController.swift in Sources */,
 				D0339DD21C00DA6100A17DEB /* AbstractCollection.swift in Sources */,
 				D02A72111BBEFCD300940C17 /* DDPMessage.swift in Sources */,
 				D0D724661C4E7FBA00EE91DC /* DDPUtilities.swift in Sources */,
 				D04D0DB91C21D489000244D6 /* MeteorDocument.swift in Sources */,
 				D02A72121BBEFCD300940C17 /* DDPExtensions.swift in Sources */,
+				8C715F192181DB9900E36872 /* MeteorOAuth.swift in Sources */,
 				6FFFCBC71C64352300C147F2 /* DDPExponentialBackoff.swift in Sources */,
 				D0C71B561BC172F40089B6CE /* Meteor.swift in Sources */,
 				D02A72131BBEFCD300940C17 /* DDPEvents.swift in Sources */,
@@ -578,9 +755,11 @@
 /* Begin XCBuildConfiguration section */
 		AA0D2AC81D6BEEC700085B33 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 784AF53F14009146B85712D4 /* Pods-SwiftDDP-tvOS.debug.xcconfig */;
 			buildSettings = {
 				BITCODE_GENERATION_MODE = bitcode;
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -604,8 +783,10 @@
 		};
 		AA0D2AC91D6BEEC700085B33 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC4780E9B7DE09A9202CA5AA /* Pods-SwiftDDP-tvOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -630,6 +811,7 @@
 		};
 		AAFDED411D6BF984000583AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9CA24B7BB9B6BF021983B4B /* Pods-SwiftDDP-OSX.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -653,6 +835,7 @@
 		};
 		AAFDED421D6BF984000583AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BFDC35C53284E7C73C30DFF /* Pods-SwiftDDP-OSX.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -682,13 +865,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -717,6 +910,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -731,13 +925,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -759,6 +963,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -768,8 +974,11 @@
 		};
 		D02A71F11BBEFBCA00940C17 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C04460E2BA2B8F0F24C834B6 /* Pods-SwiftDDP.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4BQX6CVKZH;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -784,14 +993,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.houndfish.SwiftDDP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		D02A71F21BBEFBCA00940C17 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 925852DA4ADFBAE668C1E12E /* Pods-SwiftDDP.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4BQX6CVKZH;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -806,13 +1019,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.houndfish.SwiftDDP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
 		D02A725C1BBF07AF00940C17 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7AEB387C3FF0E6668DCF26 /* Pods-SwiftDDP Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 4BQX6CVKZH;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -828,7 +1044,9 @@
 		};
 		D02A725D1BBF07AF00940C17 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25E05D69EEA663D41A81BDDE /* Pods-SwiftDDP Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 4BQX6CVKZH;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,39 +1,40 @@
 PODS:
-  - CryptoSwift (0.5.2)
-  - SwiftWebSocket (2.6.2)
-  - XCGLogger (4.0.0-beta.3)
+  - CryptoSwift (0.13.0)
+  - Nimble (7.3.1)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - Quick (1.3.2)
+  - SwiftWebSocket (2.7.0)
+  - XCGLogger (6.1.0):
+    - XCGLogger/Core (= 6.1.0)
+  - XCGLogger/Core (6.1.0):
+    - ObjcExceptionBridging
 
 DEPENDENCIES:
-  - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift.git`, branch `swift3`)
-  - SwiftWebSocket (from `https://github.com/tidwall/SwiftWebSocket.git`)
-  - XCGLogger (from `https://github.com/DaveWoodCom/XCGLogger.git`, branch `swift_3.0`)
+  - CryptoSwift
+  - Nimble
+  - Quick
+  - SwiftWebSocket
+  - XCGLogger
 
-EXTERNAL SOURCES:
-  CryptoSwift:
-    :branch: swift3
-    :git: https://github.com/krzyzanowskim/CryptoSwift.git
-  SwiftWebSocket:
-    :git: https://github.com/tidwall/SwiftWebSocket.git
-  XCGLogger:
-    :branch: swift_3.0
-    :git: https://github.com/DaveWoodCom/XCGLogger.git
-
-CHECKOUT OPTIONS:
-  CryptoSwift:
-    :commit: e6b17d92b99fd0eb160ea142075f349ce46c1165
-    :git: https://github.com/krzyzanowskim/CryptoSwift.git
-  SwiftWebSocket:
-    :commit: e5a3b09e227cc555eea60356957e97e7b861a7c7
-    :git: https://github.com/tidwall/SwiftWebSocket.git
-  XCGLogger:
-    :commit: 31aa5c1dd068f6550772e34ba01d667a1b5ff2de
-    :git: https://github.com/DaveWoodCom/XCGLogger.git
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CryptoSwift
+    - Nimble
+    - ObjcExceptionBridging
+    - Quick
+    - SwiftWebSocket
+    - XCGLogger
 
 SPEC CHECKSUMS:
-  CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
-  SwiftWebSocket: 2bb9dda75c87f64eaf9768131141857ca8611aac
-  XCGLogger: 07183e4727cd4dba984456721e949b1663d6dc22
+  CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
+  Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
+  SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
+  XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
-PODFILE CHECKSUM: f80ac48690b652314e1cb99c21431e21cc96a2b4
+PODFILE CHECKSUM: fb0ba8927d064779e3c9a2b32a592dd6c8c36915
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.5.3

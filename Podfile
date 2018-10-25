@@ -7,13 +7,17 @@ target 'SwiftDDP' do
 
   # Pods for SwiftDDP
 
-pod 'CryptoSwift', :git => 'https://github.com/krzyzanowskim/CryptoSwift.git', :branch => 'swift3'
-pod 'SwiftWebSocket', :git => 'https://github.com/tidwall/SwiftWebSocket.git'
-pod 'XCGLogger', :git => 'https://github.com/DaveWoodCom/XCGLogger.git', :branch => 'swift_3.0'
+  pod 'CryptoSwift'#, :git => 'https://github.com/krzyzanowskim/CryptoSwift.git', :branch => 'swift3'
+  pod 'SwiftWebSocket'#, :git => 'https://github.com/tidwall/SwiftWebSocket.git'
+  pod 'XCGLogger'#, :git => 'https://github.com/DaveWoodCom/XCGLogger.git', :branch => 'swift_3.0'
+  
+  pod 'Quick'
+  pod 'Nimble'
 
   target 'SwiftDDP Tests' do
     inherit! :search_paths
     # Pods for testing
+    
   end
 
 end
@@ -37,7 +41,7 @@ end
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.0'
+            config.build_settings['SWIFT_VERSION'] = '4.0'
         end
     end
 end
