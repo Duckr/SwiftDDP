@@ -8,7 +8,7 @@ target 'SwiftDDP' do
   # Pods for SwiftDDP
 
   pod 'CryptoSwift'
-  pod 'SwiftWebSocket'
+  pod 'SwiftWebSocket', '2.7.0'
   pod 'XCGLogger'
   
   pod 'Quick'
@@ -36,12 +36,4 @@ target 'SwiftDDP-tvOS' do
 
   # Pods for SwiftDDP-tvOS
 
-end
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '4.0'
-        end
-    end
 end

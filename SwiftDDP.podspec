@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = 'SwiftDDP/**/*.swift'
 
   s.dependency 'CryptoSwift', '~> 0.13.0'
-  s.dependency 'SwiftWebSocket', '2.8.0'
+  s.dependency 'SwiftWebSocket', '2.7.0'
   s.dependency 'XCGLogger'
 
 end
