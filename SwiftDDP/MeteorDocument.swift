@@ -29,7 +29,7 @@ open class MeteorDocument: NSObject {
         super.init()
         if let properties = fields {
             for (key,value) in properties  {
-                if !(value is NSNull) {
+                if !(value is NSNull) && propertyNames.contains(key as! String) {
                     self.setValue(value, forKey: key as! String)
                 }
             }
@@ -89,3 +89,10 @@ open class MeteorDocument: NSObject {
     
 }
 
+fileprivate extension NSObject {
+    
+    var propertyNames: [String] {
+        
+        return Mirror(reflecting: self).children.compactMap { $0.label }
+    }
+}
