@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   s.platform = :ios, '8.1'
   s.source_files = 'SwiftDDP/**/*.swift'
 
-  s.dependency 'CryptoSwift', '~> 0.13.0'
-  s.dependency 'SwiftWebSocket', '2.7.0'
-  s.dependency 'XCGLogger'
+  s.dependency 'CryptoSwift', '~> 1.0.0'
+  s.dependency 'SwiftWebSocket', :git => 'https://github.com/tidwall/SwiftWebSocket', :branch => 'master'
+  s.dependency 'XCGLogger', '~> 7.0.0'
 
 end

@@ -8,7 +8,7 @@ target 'SwiftDDP' do
   # Pods for SwiftDDP
 
   pod 'CryptoSwift'
-  pod 'SwiftWebSocket', '2.7.0'
+  pod 'SwiftWebSocket', :git => 'https://github.com/tidwall/SwiftWebSocket', :branch => 'master'
   pod 'XCGLogger'
   
   pod 'Quick'
@@ -36,4 +36,19 @@ target 'SwiftDDP-tvOS' do
 
   # Pods for SwiftDDP-tvOS
 
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if ['CGRectExtensions'].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+        end
+        if ['SwiftWebSocket'].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '5.0'
+            end
+        end
+    end
 end
